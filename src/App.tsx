@@ -226,120 +226,145 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Layered background */}
-        <div className="absolute inset-0 bg-[#050505]" />
-        {/* Ambient background gradients */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 60% 50% at 60% 50%, rgba(234, 88, 12, 0.04) 0%, transparent 70%)' }}
-        />
+        {/* Deep layered background */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #050505 0%, #0a0808 40%, #110d0a 70%, #0a0706 100%)' }} />
         
-        {/* Warm orange glow behind the logo - 20% opacity */}
+        {/* Subtle noise texture */}
+        <div className="absolute inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
+        
+        {/* Ambient warm glow - right side */}
         <div 
-          className="absolute pointer-events-none"
+          className="absolute pointer-events-none hidden md:block"
           style={{ 
-            top: '15%', 
-            right: '5%', 
-            width: '55%', 
-            height: '70%',
-            background: 'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(234, 120, 30, 0.20) 0%, rgba(220, 60, 30, 0.08) 40%, transparent 70%)',
+            top: '10%', right: '-5%', width: '60%', height: '80%',
+            background: 'radial-gradient(ellipse 70% 70% at 50% 50%, rgba(234, 100, 20, 0.12) 0%, rgba(200, 50, 20, 0.05) 45%, transparent 70%)',
           }}
         />
-        
-        {/* Subtle noise texture overlay */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
-        
-        {/* Infinity Logo Watermark - luxury visible */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          className="absolute top-1/2 right-[2%] md:right-[8%] -translate-y-1/2 pointer-events-none select-none"
-        >
-          <img 
-            src="/images/logo.png" 
-            alt="" 
-            className="w-[70vw] md:w-[45vw] lg:w-[38vw] h-auto object-contain"
-            style={{ 
-              opacity: 0.20,
-              filter: 'blur(1.5px) brightness(1.1) saturate(0.85) drop-shadow(0 0 80px rgba(220, 50, 30, 0.15))',
-            }}
-          />
-        </motion.div>
 
-        {/* Thin horizontal accent line */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
+        {/* Thin top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/25 to-transparent" />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10 py-40 md:py-48 w-full">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.06] px-5 py-2.5 rounded-full mb-10"
-            >
-              <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-white/50 text-[11px] font-semibold uppercase tracking-[0.2em]">{"Myanmar's #1 Trading Community"}</span>
-            </motion.div>
+        {/* Two-column layout */}
+        <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10 py-36 md:py-0 w-full">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
             
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.7 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-7 leading-[1.0] tracking-tight text-balance"
-            >
-              <span className="text-white">Infinite Knowledge.</span>
-              <br />
-              <span className="bg-gradient-to-r from-red-400 via-red-500 to-orange-500 bg-clip-text text-transparent">Infinite Growth.</span>
-            </motion.h1>
-            
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-lg md:text-xl text-white/40 mb-14 max-w-xl leading-relaxed font-normal"
-            >
-              Empowering Myanmar traders with free professional trading education and real broker support.
-            </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.7 }}
-              className="flex flex-col sm:flex-row gap-4 mb-20"
-            >
-              <a 
-                href="https://t.me/+ttDUW71_HVwyMWM9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all shadow-2xl shadow-red-500/15 hover:shadow-red-500/25 active:scale-[0.98] flex items-center justify-center gap-2.5"
+            {/* LEFT SIDE - Text Content */}
+            <div className="flex-1 max-w-2xl">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-2.5 bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm px-5 py-2.5 rounded-full mb-8"
               >
-                Join Free Community <ChevronRight className="w-4 h-4" />
-              </a>
-              <a 
-                href="#systems"
-                className="bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] hover:border-white/[0.12] text-white/80 hover:text-white px-8 py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.98]"
+                <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
+                <span className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.2em]">{"Myanmar's #1 Trading Community"}</span>
+              </motion.div>
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.12, duration: 0.7 }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-[0.95] tracking-tight"
               >
-                Explore Systems
-              </a>
-            </motion.div>
+                <span className="text-white">Infinite Knowledge.</span>
+                <br />
+                <span className="bg-gradient-to-r from-red-400 via-orange-500 to-red-500 bg-clip-text text-transparent">Infinite Growth.</span>
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25, duration: 0.7 }}
+                className="text-lg md:text-xl text-white/50 mb-10 max-w-lg leading-relaxed"
+              >
+                Empowering Myanmar traders with free professional trading education and real broker support.
+              </motion.p>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.7 }}
+                className="flex flex-col sm:flex-row gap-4 mb-12"
+              >
+                <a 
+                  href="https://t.me/+ttDUW71_HVwyMWM9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative bg-gradient-to-r from-orange-500 via-red-500 to-red-600 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.97] flex items-center justify-center gap-2.5 shadow-xl shadow-red-500/20 hover:shadow-2xl hover:shadow-orange-500/30 overflow-hidden"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="relative flex items-center gap-2.5">Join Free Community <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" /></span>
+                </a>
+                <a 
+                  href="#systems"
+                  className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.10] hover:border-white/[0.18] backdrop-blur-sm text-white/80 hover:text-white px-8 py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.97]"
+                >
+                  Explore Systems
+                </a>
+              </motion.div>
 
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="relative p-5 md:p-6 rounded-2xl max-w-md glass border-white/[0.06]"
+              >
+                <div className="absolute -top-2.5 left-5 text-2xl text-orange-500/40 font-serif leading-none">{'\u201C'}</div>
+                <p className="text-white/40 text-sm leading-relaxed">
+                  Infinity Trader Community is built to make Myanmar's trading ecosystem stronger by giving everything we can for FREE — knowledge, systems, and broker support.
+                </p>
+              </motion.div>
+            </div>
+            
+            {/* RIGHT SIDE - 3D Logo Visual */}
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.65, duration: 0.8 }}
-              className="relative p-6 md:p-8 rounded-2xl max-w-lg bg-white/[0.02] border border-white/[0.05]"
+              initial={{ opacity: 0, scale: 0.9, x: 40 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ delay: 0.2, duration: 1.2, ease: "easeOut" }}
+              className="flex-1 flex items-center justify-center relative w-full max-w-md lg:max-w-lg xl:max-w-xl"
             >
-              <div className="absolute -top-3 left-6 text-3xl text-red-500/30 font-serif leading-none">{'"'}</div>
-              <p className="text-white/35 text-sm md:text-base leading-relaxed font-light">
-                Infinity Trader Community is built to make Myanmar's trading ecosystem stronger by giving everything we can for FREE  — knowledge, systems, and broker support.
-              </p>
+              {/* Orange glow behind logo */}
+              <div 
+                className="absolute inset-0 animate-glow-pulse pointer-events-none"
+                style={{ 
+                  background: 'radial-gradient(ellipse 75% 65% at 50% 48%, rgba(234, 120, 30, 0.20) 0%, rgba(220, 60, 30, 0.08) 50%, transparent 75%)',
+                }}
+              />
+              {/* Secondary red glow */}
+              <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{ 
+                  background: 'radial-gradient(ellipse 55% 55% at 52% 50%, rgba(220, 38, 38, 0.12) 0%, transparent 65%)',
+                }}
+              />
+              
+              {/* Logo with floating animation */}
+              <div className="animate-hero-float relative">
+                <img 
+                  src="/images/logo.png" 
+                  alt="Infinity Trader 3D Logo" 
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                  style={{ 
+                    filter: 'brightness(1.15) saturate(1.1) drop-shadow(0 8px 40px rgba(200, 40, 20, 0.35)) drop-shadow(0 0 80px rgba(234, 100, 30, 0.18))',
+                    maxHeight: '65vh',
+                  }}
+                />
+                {/* Top-edge orange highlight reflection */}
+                <div 
+                  className="absolute top-0 left-[10%] right-[10%] h-[40%] pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(255, 160, 50, 0.08) 0%, transparent 100%)',
+                    borderRadius: '50%',
+                    filter: 'blur(20px)',
+                  }}
+                />
+              </div>
             </motion.div>
           </div>
         </div>
 
         {/* Bottom fade to next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#080606] to-transparent pointer-events-none" />
       </section>
 
       {/* Purpose Section */}
