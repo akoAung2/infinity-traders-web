@@ -225,10 +225,24 @@ export default function App() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-        {/* Background Glows */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-red-600/20 blur-[120px] rounded-full" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-red-800/10 blur-[120px] rounded-full" />
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-gradient-to-br from-black via-[#0a0a0a] to-[#1a0e0a]">
+        {/* Soft orange radial glow behind the logo */}
+        <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] bg-orange-600/10 blur-[180px] rounded-full pointer-events-none" />
+        
+        {/* Large Infinity Logo Watermark */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[5%] pointer-events-none select-none"
+        >
+          <img 
+            src="/images/logo.png" 
+            alt="" 
+            className="w-[60vw] h-auto md:w-auto md:h-[65vh] object-contain opacity-[0.07] blur-[2px] brightness-75 saturate-50"
+            style={{ filter: 'blur(2px) brightness(0.75) saturate(0.5) sepia(0.3)' }}
+          />
+        </motion.div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="max-w-4xl">
@@ -292,15 +306,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Decorative Element */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block opacity-40 pointer-events-none select-none">
-          <img 
-            src="https://picsum.photos/seed/infinity-red-3d/1000/1000" 
-            alt="Infinity Trader Decorative" 
-            className="w-[700px] h-auto animate-float"
-            referrerPolicy="no-referrer"
-          />
-        </div>
+
       </section>
 
       {/* Purpose Section */}
