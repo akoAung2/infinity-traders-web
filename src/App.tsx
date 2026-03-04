@@ -14,7 +14,8 @@ import {
   X,
   Globe,
   Award,
-  Calendar
+  Calendar,
+  Send
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -559,33 +560,153 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-stone-950">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <SectionHeading 
-            title="Connect With Us" 
-            subtitle="Have questions? Join our social channels or reach out directly to our support team."
-          />
-          
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-            {[
-              { name: 'Telegram', icon: MessageCircle, color: 'bg-sky-500', href: 'https://t.me/+ttDUW71_HVwyMWM9' },
-              { name: 'TikTok', icon: Video, color: 'bg-pink-600', href: 'https://www.tiktok.com/@infinity_traders1?_r=1&_t=ZS-94Oxj7X8eaC' },
-              { name: 'Gmail', icon: Mail, color: 'bg-red-500', href: 'mailto:iinfinitytrraders@gmail.com' }
-            ].map((social, i) => (
-              <motion.a
-                key={i}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="flex flex-col items-center gap-4 group"
+      <section id="contact" className="relative py-28 md:py-36 overflow-hidden">
+        {/* Background layers */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #050505 0%, #0d0808 35%, #120a07 60%, #080505 100%)' }} />
+        <div 
+          className="absolute pointer-events-none"
+          style={{ top: '5%', right: '10%', width: '50%', height: '80%', background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(234, 100, 20, 0.06) 0%, transparent 70%)' }}
+        />
+        {/* Faint watermark text */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
+          <span className="text-[12vw] font-black uppercase tracking-widest text-white/[0.015] whitespace-nowrap">CONTACT</span>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+            
+            {/* LEFT SIDE - Contact Info */}
+            <div className="flex-1">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
               >
-                <div className={`w-20 h-20 rounded-3xl ${social.color} flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all red-glow`}>
-                  <social.icon className="w-10 h-10 text-white" />
+                <span className="inline-block bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm text-white/60 text-[11px] font-semibold uppercase tracking-[0.2em] px-5 py-2.5 rounded-full mb-6">
+                  Contact
+                </span>
+                <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-white">
+                  Get in touch
+                </h2>
+                <p className="text-white/40 text-lg leading-relaxed max-w-md mb-10">
+                  Have questions about trading, our community, or broker support? Reach out through any of the channels below.
+                </p>
+              </motion.div>
+
+              <div className="flex flex-col gap-4">
+                {[
+                  { 
+                    label: 'Email Us', 
+                    detail: 'iinfinitytrraders@gmail.com', 
+                    icon: Mail, 
+                    href: 'mailto:iinfinitytrraders@gmail.com',
+                    iconBg: 'bg-red-500/15',
+                    iconColor: 'text-red-400',
+                  },
+                  { 
+                    label: 'Telegram', 
+                    detail: 'Infinity Trader Community', 
+                    icon: MessageCircle, 
+                    href: 'https://t.me/+ttDUW71_HVwyMWM9',
+                    iconBg: 'bg-sky-500/15',
+                    iconColor: 'text-sky-400',
+                  },
+                  { 
+                    label: 'TikTok', 
+                    detail: '@infinity_traders1', 
+                    icon: Video, 
+                    href: 'https://www.tiktok.com/@infinity_traders1?_r=1&_t=ZS-94Oxj7X8eaC',
+                    iconBg: 'bg-pink-500/15',
+                    iconColor: 'text-pink-400',
+                  },
+                ].map((item, i) => (
+                  <motion.a
+                    key={i}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                    className="group flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-orange-500/20 hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/[0.04]"
+                  >
+                    <div className={`w-12 h-12 rounded-xl ${item.iconBg} flex items-center justify-center shrink-0`}>
+                      <item.icon className={`w-5 h-5 ${item.iconColor}`} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-white font-semibold text-sm mb-0.5">{item.label}</div>
+                      <div className="text-white/35 text-sm truncate">{item.detail}</div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-orange-400 transition-all duration-300 group-hover:translate-x-1 shrink-0" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT SIDE - Contact Form */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+              className="flex-1 relative"
+            >
+              {/* Glow behind form */}
+              <div 
+                className="absolute -inset-4 pointer-events-none hidden lg:block"
+                style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(234, 100, 30, 0.05) 0%, transparent 70%)' }}
+              />
+              
+              <form 
+                onSubmit={(e) => e.preventDefault()}
+                className="relative p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm"
+                style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 0 80px rgba(234, 100, 30, 0.03)' }}
+              >
+                <h3 className="text-xl font-bold text-white mb-1">Send us a message</h3>
+                <p className="text-white/30 text-sm mb-8">We will get back to you as soon as possible.</p>
+
+                <div className="flex flex-col gap-5">
+                  <div>
+                    <label htmlFor="contact-name" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Name</label>
+                    <input 
+                      id="contact-name"
+                      type="text" 
+                      placeholder="Your full name"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)]"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-email" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Email</label>
+                    <input 
+                      id="contact-email"
+                      type="email" 
+                      placeholder="your@email.com"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)]"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-message" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Message</label>
+                    <textarea 
+                      id="contact-message"
+                      rows={5}
+                      placeholder="How can we help you?"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)] resize-none"
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    className="group relative w-full bg-gradient-to-r from-orange-500 via-red-500 to-red-600 text-white py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.98] hover:shadow-2xl hover:shadow-orange-500/20 overflow-hidden mt-1"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="relative flex items-center justify-center gap-2.5">
+                      Send Message <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </button>
                 </div>
-                <span className="font-bold text-lg">{social.name}</span>
-              </motion.a>
-            ))}
+              </form>
+            </motion.div>
           </div>
         </div>
       </section>
