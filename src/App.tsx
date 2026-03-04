@@ -481,13 +481,13 @@ export default function App() {
           
           <div className="grid md:grid-cols-2 gap-8">
             <BrokerActionBlock 
-              name="VT Markets"
-              liveUrl="https://www.vtmarkets.com/"
+              name="Ultima Markets"
+              liveUrl="https://ultgo.com/la-com/BavQ65KR"
               guideUrl="#"
             />
             <BrokerActionBlock 
-              name="Ultima Markets"
-              liveUrl="https://www.ultimamarkets.com/"
+              name="VT Markets"
+              liveUrl="https://www.vtmarkets.com/trade-now/?affid=22393651"
               guideUrl="#"
             />
           </div>
