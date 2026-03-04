@@ -228,31 +228,41 @@ export default function App() {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Layered background */}
         <div className="absolute inset-0 bg-[#050505]" />
+        {/* Ambient background gradients */}
         <div 
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 65% 50%, rgba(234, 88, 12, 0.06) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse 60% 50% at 60% 50%, rgba(234, 88, 12, 0.04) 0%, transparent 70%)' }}
         />
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 40% 60% at 70% 45%, rgba(239, 68, 68, 0.04) 0%, transparent 60%)' }}
-        />
-        {/* Subtle noise texture overlay */}
-        <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
         
-        {/* Large Infinity Logo Watermark - extremely subtle */}
+        {/* Warm orange glow behind the logo - 20% opacity */}
+        <div 
+          className="absolute pointer-events-none"
+          style={{ 
+            top: '15%', 
+            right: '5%', 
+            width: '55%', 
+            height: '70%',
+            background: 'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(234, 120, 30, 0.20) 0%, rgba(220, 60, 30, 0.08) 40%, transparent 70%)',
+          }}
+        />
+        
+        {/* Subtle noise texture overlay */}
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
+        
+        {/* Infinity Logo Watermark - luxury visible */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2.5, ease: "easeOut" }}
-          className="absolute inset-0 flex items-center justify-end pointer-events-none select-none"
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="absolute top-1/2 right-[2%] md:right-[8%] -translate-y-1/2 pointer-events-none select-none"
         >
           <img 
             src="/images/logo.png" 
             alt="" 
-            className="w-[80vw] md:w-[55vw] lg:w-[45vw] h-auto object-contain mr-[-5%] md:mr-[2%]"
+            className="w-[70vw] md:w-[45vw] lg:w-[38vw] h-auto object-contain"
             style={{ 
-              opacity: 0.035, 
-              filter: 'blur(6px) brightness(0.6) saturate(0.3) grayscale(0.4)',
+              opacity: 0.20,
+              filter: 'blur(1.5px) brightness(1.1) saturate(0.85) drop-shadow(0 0 80px rgba(220, 50, 30, 0.15))',
             }}
           />
         </motion.div>
