@@ -25,11 +25,9 @@ const Logo = ({ size = "normal" }: { size?: "small" | "normal" | "large" }) => {
   return (
     <div className={`${dimensions} flex items-center justify-center select-none`}>
       <img 
-        src="https://picsum.photos/seed/infinity-red-3d/200/200" 
+        src="/images/logo.png" 
         alt="Infinity Trader Logo" 
-        className="w-full h-full object-contain animate-pulse"
-        style={{ animationDuration: '4s' }}
-        referrerPolicy="no-referrer"
+        className="w-full h-full object-contain"
       />
     </div>
   );
