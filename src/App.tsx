@@ -505,8 +505,8 @@ export default function App() {
           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
             {[
               { name: 'Telegram', icon: MessageCircle, color: 'bg-sky-500', href: 'https://t.me/+ttDUW71_HVwyMWM9' },
-              { name: 'TikTok', icon: Video, color: 'bg-pink-600', href: '#' },
-              { name: 'Gmail', icon: Mail, color: 'bg-red-500', href: '#' }
+              { name: 'TikTok', icon: Video, color: 'bg-pink-600', href: 'https://www.tiktok.com/@infinity_traders1?_r=1&_t=ZS-94Oxj7X8eaC' },
+              { name: 'Gmail', icon: Mail, color: 'bg-red-500', href: 'mailto:iinfinitytrraders@gmail.com' }
             ].map((social, i) => (
               <motion.a
                 key={i}
