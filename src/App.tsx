@@ -139,11 +139,11 @@ const ContactForm = () => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
 
-    const subject = encodeURIComponent(`Message from ${formData.name} via Infinity Trader`);
+    const subject = encodeURIComponent('New Message from Website');
     const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+      `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`
     );
-    window.open(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`, '_self');
+    window.open(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`, '_blank');
     setSent(true);
     setTimeout(() => {
       setSent(false);
