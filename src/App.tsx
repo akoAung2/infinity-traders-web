@@ -125,6 +125,120 @@ const Navbar = () => {
   );
 };
 
+const CONTACT_EMAIL = 'iinfinitytraders@gmail.com';
+
+const ContactForm = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+
+    const subject = encodeURIComponent(`Message from ${formData.name} via Infinity Trader`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+    );
+    window.open(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`, '_self');
+    setSent(true);
+    setTimeout(() => {
+      setSent(false);
+      setFormData({ name: '', email: '', message: '' });
+    }, 4000);
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="relative p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm"
+      style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 0 80px rgba(234, 100, 30, 0.03)' }}
+    >
+      <h3 className="text-xl font-bold text-white mb-1">Send us a message</h3>
+      <p className="text-white/30 text-sm mb-8">We will get back to you as soon as possible.</p>
+
+      <AnimatePresence mode="wait">
+        {sent ? (
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="flex flex-col items-center justify-center py-12 gap-4"
+          >
+            <div className="w-14 h-14 rounded-full bg-green-500/15 flex items-center justify-center">
+              <ShieldCheck className="w-7 h-7 text-green-400" />
+            </div>
+            <p className="text-white font-semibold text-lg">Message Ready</p>
+            <p className="text-white/40 text-sm text-center max-w-xs">
+              Your email client should open with the message pre-filled. Just hit send!
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="form"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="flex flex-col gap-5"
+          >
+            <div>
+              <label htmlFor="contact-name" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Name</label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your full name"
+                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)]"
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-email" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Email</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="your@email.com"
+                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)]"
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-message" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={5}
+                required
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="How can we help you?"
+                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)] resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="group relative w-full bg-gradient-to-r from-orange-500 via-red-500 to-red-600 text-white py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.98] hover:shadow-2xl hover:shadow-orange-500/20 overflow-hidden mt-1"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative flex items-center justify-center gap-2.5">
+                Send Message <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </form>
+  );
+};
+
 const SectionHeading = ({ title, subtitle, centered = true }: { title: string; subtitle?: string; centered?: boolean }) => (
   <div className={`mb-12 ${centered ? 'text-center' : 'text-left'}`}>
     <motion.h2 
@@ -598,9 +712,9 @@ export default function App() {
                 {[
                   { 
                     label: 'Email Us', 
-                    detail: 'iinfinitytrraders@gmail.com', 
+                    detail: 'iinfinitytraders@gmail.com', 
                     icon: Mail, 
-                    href: 'mailto:iinfinitytrraders@gmail.com',
+                    href: 'mailto:iinfinitytraders@gmail.com',
                     iconBg: 'bg-red-500/15',
                     iconColor: 'text-red-400',
                   },
@@ -659,53 +773,7 @@ export default function App() {
                 style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(234, 100, 30, 0.05) 0%, transparent 70%)' }}
               />
               
-              <form 
-                onSubmit={(e) => e.preventDefault()}
-                className="relative p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm"
-                style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04), 0 0 80px rgba(234, 100, 30, 0.03)' }}
-              >
-                <h3 className="text-xl font-bold text-white mb-1">Send us a message</h3>
-                <p className="text-white/30 text-sm mb-8">We will get back to you as soon as possible.</p>
-
-                <div className="flex flex-col gap-5">
-                  <div>
-                    <label htmlFor="contact-name" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Name</label>
-                    <input 
-                      id="contact-name"
-                      type="text" 
-                      placeholder="Your full name"
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)]"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-email" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Email</label>
-                    <input 
-                      id="contact-email"
-                      type="email" 
-                      placeholder="your@email.com"
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)]"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-message" className="block text-white/50 text-xs font-semibold uppercase tracking-wider mb-2">Message</label>
-                    <textarea 
-                      id="contact-message"
-                      rows={5}
-                      placeholder="How can we help you?"
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 focus:border-orange-500/40 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(234,100,30,0.08)] resize-none"
-                    />
-                  </div>
-                  <button 
-                    type="submit"
-                    className="group relative w-full bg-gradient-to-r from-orange-500 via-red-500 to-red-600 text-white py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.98] hover:shadow-2xl hover:shadow-orange-500/20 overflow-hidden mt-1"
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="relative flex items-center justify-center gap-2.5">
-                      Send Message <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  </button>
-                </div>
-              </form>
+              <ContactForm />
             </motion.div>
           </div>
         </div>
