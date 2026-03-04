@@ -225,88 +225,111 @@ export default function App() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-gradient-to-br from-black via-[#0a0a0a] to-[#1a0e0a]">
-        {/* Soft orange radial glow behind the logo */}
-        <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] bg-orange-600/10 blur-[180px] rounded-full pointer-events-none" />
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Layered background */}
+        <div className="absolute inset-0 bg-[#050505]" />
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 65% 50%, rgba(234, 88, 12, 0.06) 0%, transparent 70%)' }}
+        />
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 40% 60% at 70% 45%, rgba(239, 68, 68, 0.04) 0%, transparent 60%)' }}
+        />
+        {/* Subtle noise texture overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
         
-        {/* Large Infinity Logo Watermark */}
+        {/* Large Infinity Logo Watermark - extremely subtle */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[5%] pointer-events-none select-none"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2.5, ease: "easeOut" }}
+          className="absolute inset-0 flex items-center justify-end pointer-events-none select-none"
         >
           <img 
             src="/images/logo.png" 
             alt="" 
-            className="w-[60vw] h-auto md:w-auto md:h-[65vh] object-contain opacity-[0.07] blur-[2px] brightness-75 saturate-50"
-            style={{ filter: 'blur(2px) brightness(0.75) saturate(0.5) sepia(0.3)' }}
+            className="w-[80vw] md:w-[55vw] lg:w-[45vw] h-auto object-contain mr-[-5%] md:mr-[2%]"
+            style={{ 
+              opacity: 0.035, 
+              filter: 'blur(6px) brightness(0.6) saturate(0.3) grayscale(0.4)',
+            }}
           />
         </motion.div>
+
+        {/* Thin horizontal accent line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="max-w-4xl">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10 py-40 md:py-48 w-full">
+          <div className="max-w-3xl">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-2 rounded-full mb-8"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.06] px-5 py-2.5 rounded-full mb-10"
             >
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-red-500 text-xs font-bold uppercase tracking-widest">Myanmar's #1 Trading Community</span>
+              <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
+              <span className="text-white/50 text-[11px] font-semibold uppercase tracking-[0.2em]">{"Myanmar's #1 Trading Community"}</span>
             </motion.div>
             
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-[0.9] tracking-tighter"
+              transition={{ delay: 0.15, duration: 0.7 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-7 leading-[1.0] tracking-tight text-balance"
             >
-              Infinite Knowledge.<br />
-              <span className="text-red-500">Infinite Growth.</span>
+              <span className="text-white">Infinite Knowledge.</span>
+              <br />
+              <span className="bg-gradient-to-r from-red-400 via-red-500 to-orange-500 bg-clip-text text-transparent">Infinite Growth.</span>
             </motion.h1>
             
             <motion.p 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/60 mb-12 max-w-2xl leading-relaxed"
+              transition={{ delay: 0.3, duration: 0.7 }}
+              className="text-lg md:text-xl text-white/40 mb-14 max-w-xl leading-relaxed font-normal"
             >
               Empowering Myanmar traders with free professional trading education and real broker support.
             </motion.p>
             
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 mb-16"
+              transition={{ delay: 0.45, duration: 0.7 }}
+              className="flex flex-col sm:flex-row gap-4 mb-20"
             >
               <a 
                 href="https://t.me/+ttDUW71_HVwyMWM9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-xl shadow-red-500/20 active:scale-95 flex items-center justify-center gap-2"
+                className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all shadow-2xl shadow-red-500/15 hover:shadow-red-500/25 active:scale-[0.98] flex items-center justify-center gap-2.5"
               >
-                Join Free Community <ChevronRight className="w-5 h-5" />
+                Join Free Community <ChevronRight className="w-4 h-4" />
               </a>
-              <button className="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all active:scale-95">
+              <a 
+                href="#systems"
+                className="bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] hover:border-white/[0.12] text-white/80 hover:text-white px-8 py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.98]"
+              >
                 Explore Systems
-              </button>
+              </a>
             </motion.div>
 
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="p-6 glass rounded-3xl border-red-500/10 max-w-xl"
+              transition={{ delay: 0.65, duration: 0.8 }}
+              className="relative p-6 md:p-8 rounded-2xl max-w-lg bg-white/[0.02] border border-white/[0.05]"
             >
-              <p className="text-white/70 italic leading-relaxed">
-                "Infinity Trader Community is built to make Myanmar’s trading ecosystem stronger by giving everything we can for FREE — knowledge, systems, and broker support."
+              <div className="absolute -top-3 left-6 text-3xl text-red-500/30 font-serif leading-none">{'"'}</div>
+              <p className="text-white/35 text-sm md:text-base leading-relaxed font-light">
+                Infinity Trader Community is built to make Myanmar's trading ecosystem stronger by giving everything we can for FREE  — knowledge, systems, and broker support.
               </p>
             </motion.div>
           </div>
         </div>
 
-
+        {/* Bottom fade to next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none" />
       </section>
 
       {/* Purpose Section */}
