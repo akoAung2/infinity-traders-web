@@ -79,7 +79,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Purpose', href: '#purpose' },
     { name: 'Systems', href: '#systems' },
-    { name: 'Premium', href: '#premium' },
+    { name: 'Next-Level ', href: '#premium' },
     { name: 'Brokers', href: '#brokers' },
     { name: 'Contact', href: '#contact' },
   ];
