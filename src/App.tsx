@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   TrendingUp, 
   BookOpen, 
@@ -18,6 +18,37 @@ import {
   Send
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+
+// --- Motion utilities ---
+
+const useScrollDirection = () => {
+  const [direction, setDirection] = useState<'up' | 'down'>('down');
+  const lastY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const updateDirection = () => {
+      const currentY = window.scrollY;
+      if (Math.abs(currentY - lastY.current) > 8) {
+        setDirection(currentY < lastY.current ? 'up' : 'down');
+        lastY.current = currentY;
+      }
+      ticking.current = false;
+    };
+    const onScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateDirection);
+        ticking.current = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return direction;
+};
+
+const revealViewport = { once: false, amount: 0.2, margin: '0px 0px -10% 0px' } as const;
 
 // --- Components ---
 
@@ -125,7 +156,7 @@ const Navbar = () => {
   );
 };
 
-const CONTACT_EMAIL = 'infinitytraders@gmail.com';
+const CONTACT_EMAIL = 'iinfinitytraders@gmail.com';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -244,7 +275,7 @@ const SectionHeading = ({ title, subtitle, centered = true }: { title: string; s
     <motion.h2 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={revealViewport}
       className="text-3xl md:text-4xl font-bold mb-4"
     >
       {title}
@@ -253,7 +284,7 @@ const SectionHeading = ({ title, subtitle, centered = true }: { title: string; s
       <motion.p 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={revealViewport}
         transition={{ delay: 0.1 }}
         className="text-white/60 max-w-2xl mx-auto"
       >
@@ -335,151 +366,104 @@ const BrokerActionBlock = ({ name, liveUrl, guideUrl }: { name: string; liveUrl:
 // --- Main App ---
 
 export default function App() {
+  const scrollDirection = useScrollDirection();
+
   return (
-    <div className="min-h-screen font-sans selection:bg-red-500/30">
+    <div
+      data-scroll-direction={scrollDirection}
+      className="min-h-screen font-sans selection:bg-red-500/30 transition-colors duration-300"
+    >
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Deep layered background */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #050505 0%, #0a0808 40%, #110d0a 70%, #0a0706 100%)' }} />
-        
-        {/* Subtle noise texture */}
-        <div className="absolute inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
-        
-        {/* Ambient warm glow - right side */}
-        <div 
-          className="absolute pointer-events-none hidden md:block"
-          style={{ 
-            top: '10%', right: '-5%', width: '60%', height: '80%',
-            background: 'radial-gradient(ellipse 70% 70% at 50% 50%, rgba(234, 100, 20, 0.12) 0%, rgba(200, 50, 20, 0.05) 45%, transparent 70%)',
-          }}
-        />
-
-        {/* Thin top accent line */}
+      <section className="hero-section relative min-h-[90vh] overflow-hidden bg-[#050505]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_35%_at_50%_35%,rgba(255,106,42,0.035),transparent_75%)]" />
+        <div className="hero-grid absolute inset-x-0 bottom-0 h-[48%] pointer-events-none" />
+        <div className="hero-line hero-line-left absolute left-[-6%] top-[28%] h-[55%] w-px rotate-[28deg] bg-white/[0.07]" />
+        <div className="hero-line hero-line-right absolute right-[-6%] top-[26%] h-[58%] w-px rotate-[-28deg] bg-white/[0.07]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/25 to-transparent" />
-        
-        {/* Two-column layout */}
-        <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10 py-36 md:py-0 w-full">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
-            
-            {/* LEFT SIDE - Text Content */}
-            <div className="flex-1 max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-2.5 bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm px-5 py-2.5 rounded-full mb-8"
-              >
-                <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
-                <span className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.2em]">{"Myanmar's #1 Trading Community"}</span>
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.12, duration: 0.7 }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-[0.95] tracking-tight"
-              >
-                <span className="text-white">Infinite Knowledge.</span>
-                <br />
-                <span className="bg-gradient-to-r from-red-400 via-orange-500 to-red-500 bg-clip-text text-transparent">Infinite Growth.</span>
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25, duration: 0.7 }}
-                className="text-lg md:text-xl text-white/50 mb-10 max-w-lg leading-relaxed"
-              >
-                Empowering Myanmar traders with free professional trading education and real broker support.
-              </motion.p>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.7 }}
-                className="flex flex-col sm:flex-row gap-4 mb-12"
-              >
-                <a 
-                  href="https://t.me/+ttDUW71_HVwyMWM9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative bg-gradient-to-r from-orange-500 via-red-500 to-red-600 text-white px-8 py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.97] flex items-center justify-center gap-2.5 shadow-xl shadow-red-500/20 hover:shadow-2xl hover:shadow-orange-500/30 overflow-hidden"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative flex items-center gap-2.5">Join Free Community <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" /></span>
-                </a>
-                <a 
-                  href="#systems"
-                  className="bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.10] hover:border-white/[0.18] backdrop-blur-sm text-white/80 hover:text-white px-8 py-4 rounded-xl font-semibold text-base transition-all active:scale-[0.97]"
-                >
-                  Explore Systems
-                </a>
-              </motion.div>
 
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="relative p-5 md:p-6 rounded-2xl max-w-md glass border-white/[0.06]"
-              >
-                <div className="absolute -top-2.5 left-5 text-2xl text-orange-500/40 font-serif leading-none">{'\u201C'}</div>
-                <p className="text-white/40 text-sm leading-relaxed">
-                  Infinity Trader Community is built to make Myanmar's trading ecosystem stronger by giving everything we can for FREE — knowledge, systems, and broker support.
-                </p>
-              </motion.div>
-            </div>
-            
-            {/* RIGHT SIDE - 3D Logo Visual */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, x: 40 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 1.2, ease: "easeOut" }}
-              className="flex-1 flex items-center justify-center relative w-full max-w-md lg:max-w-lg xl:max-w-xl"
-            >
-              {/* Orange glow behind logo */}
-              <div 
-                className="absolute inset-0 animate-glow-pulse pointer-events-none"
-                style={{ 
-                  background: 'radial-gradient(ellipse 75% 65% at 50% 48%, rgba(234, 120, 30, 0.20) 0%, rgba(220, 60, 30, 0.08) 50%, transparent 75%)',
-                }}
-              />
-              {/* Secondary red glow */}
-              <div 
-                className="absolute inset-0 pointer-events-none"
-                style={{ 
-                  background: 'radial-gradient(ellipse 55% 55% at 52% 50%, rgba(220, 38, 38, 0.12) 0%, transparent 65%)',
-                }}
-              />
-              
-              {/* Logo with floating animation */}
-              <div className="animate-hero-float relative">
-                <img 
-                  src="/images/logo.png" 
-                  alt="Infinity Trader 3D Logo" 
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                  style={{ 
-                    filter: 'brightness(1.15) saturate(1.1) drop-shadow(0 8px 40px rgba(200, 40, 20, 0.35)) drop-shadow(0 0 80px rgba(234, 100, 30, 0.18))',
-                    maxHeight: '65vh',
-                  }}
-                />
-                {/* Top-edge orange highlight reflection */}
-                <div 
-                  className="absolute top-0 left-[10%] right-[10%] h-[40%] pointer-events-none"
-                  style={{
-                    background: 'linear-gradient(180deg, rgba(255, 160, 50, 0.08) 0%, transparent 100%)',
-                    borderRadius: '50%',
-                    filter: 'blur(20px)',
-                  }}
-                />
+        <div className="relative z-10 mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center justify-center px-6 pb-32 pt-32 text-center md:px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-white/[0.09] bg-white/[0.035] px-4 py-2 backdrop-blur-sm"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#FF3B30] hero-status-dot" />
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-white/55 md:text-[11px]">{"Myanmar's #1 Trading Community"}</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-[1100px] text-balance text-[clamp(48px,7vw,92px)] font-black leading-[0.96] tracking-[-0.055em]"
+          >
+            <span className="text-[#F5F5F5]">Infinity Knowledge.</span>
+            <br />
+            <span className="bg-gradient-to-r from-[#FF3B30] to-[#FF6A2A] bg-clip-text text-transparent">Infinity Growth.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 max-w-[620px] text-[15px] leading-[1.6] text-[#A1A1AA] md:text-[18px]"
+          >
+            Empowering Myanmar traders with free professional trading education and real broker support.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row"
+          >
+            <a href="https://t.me/+ttDUW71_HVwyMWM9" target="_blank" rel="noopener noreferrer" className="group inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF3B30] to-[#FF5A30] px-7 text-[15px] font-semibold text-white shadow-lg shadow-red-500/15 transition-all duration-300 hover:brightness-110 hover:shadow-xl hover:shadow-red-500/25 active:scale-[0.98]">
+              Join Free Community <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+            <a href="#systems" className="inline-flex h-14 items-center justify-center rounded-xl border border-white/[0.18] bg-white/[0.02] px-7 text-[15px] font-semibold text-white/80 transition-all duration-300 hover:border-white/[0.35] hover:bg-white/[0.05] hover:text-white active:scale-[0.98]">
+              Explore Systems
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-14 flex items-center justify-center divide-x divide-white/[0.12]"
+          >
+            {[
+              { value: '100%', label: 'Free Core Education' },
+              { value: '3', label: 'Trading Systems' },
+              { value: '2', label: 'Broker Partners' },
+            ].map((stat) => (
+              <div key={stat.label} className="px-5 text-center first:pl-0 last:pr-0 sm:px-9">
+                <div className="font-sans text-2xl font-bold tracking-tight text-[#F5F5F5] md:text-3xl">{stat.value}</div>
+                <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-[#71717A] md:text-[10px]">{stat.label}</div>
               </div>
-            </motion.div>
-          </div>
+            ))}
+          </motion.div>
         </div>
 
-        {/* Bottom fade to next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#080606] to-transparent pointer-events-none" />
+        <div className="hero-marquee absolute bottom-0 left-0 right-0 z-20 overflow-hidden border-y border-red-500/[0.25] bg-[#050505]/70 py-3 backdrop-blur-sm md:py-4">
+          <div className="mb-2 text-center font-mono text-[9px] font-medium uppercase tracking-[0.18em] text-white/40 md:text-[10px]">In collaboration with</div>
+          <div className="hero-marquee-mask overflow-hidden">
+            <div className="hero-marquee-track flex w-max items-center">
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex shrink-0 items-center gap-6 pr-6 md:gap-10 md:pr-10">
+                  {['VT Markets', 'Ultima Markets', 'Burmese Funded Trader', 'Doo Prime', 'Select2Notion'].map((name) => (
+                    <span key={`${copy}-${name}`} className="flex items-center gap-6 whitespace-nowrap font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-white/70 transition-colors hover:text-white md:gap-10 md:text-[15px]">
+                      {name}<span className="h-1 w-1 rounded-full bg-[#FF3B30]" />
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Purpose Section */}
@@ -520,10 +504,10 @@ export default function App() {
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden glass p-2">
                 <img 
-                  src="https://picsum.photos/seed/trading/800/800" 
-                  alt="Trading Purpose" 
-                  className="w-full h-full object-cover rounded-2xl opacity-80"
-                  referrerPolicy="no-referrer"
+                  src="/images/purpose.png" 
+                  alt="Infinity Trader platform with a trading dashboard and market chart" 
+                  className="w-full h-full object-cover rounded-xl opacity-100 border border-white/20"
+                  style={{ marginTop: '4px' }}
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 glass p-6 rounded-2xl red-glow animate-float">
@@ -694,7 +678,7 @@ export default function App() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ duration: 0.6 }}
               >
                 <span className="inline-block bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm text-white/60 text-[11px] font-semibold uppercase tracking-[0.2em] px-5 py-2.5 rounded-full mb-6">
@@ -712,9 +696,9 @@ export default function App() {
                 {[
                   { 
                     label: 'Email Us', 
-                    detail: 'infinitytraders@gmail.com', 
+                    detail: 'iinfinitytraders@gmail.com', 
                     icon: Mail, 
-                    href: 'mailto:infinitytraders@gmail.com',
+                    href: 'mailto:iinfinitytraders@gmail.com',
                     iconBg: 'bg-red-500/15',
                     iconColor: 'text-red-400',
                   },
@@ -742,7 +726,7 @@ export default function App() {
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={revealViewport}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
                     className="group flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-orange-500/20 hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/[0.04]"
                   >
@@ -763,7 +747,7 @@ export default function App() {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={revealViewport}
               transition={{ delay: 0.2, duration: 0.7 }}
               className="flex-1 relative"
             >
