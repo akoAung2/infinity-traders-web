@@ -531,7 +531,7 @@ export default function App() {
             <div className="hero-marquee-track flex w-max items-center">
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex shrink-0 items-center gap-6 pr-6 md:gap-10 md:pr-10">
-                  {['VT Markets', 'Ultima Markets', 'Burmese Funded Trader', 'Doo Prime', 'Select2Notion'].map((name) => (
+                  {['VT Markets', 'Ultima Markets', 'Burmese Funded Trader', 'Select2Notion'].map((name) => (
                     <span key={`${copy}-${name}`} className="flex items-center gap-6 whitespace-nowrap font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-white/70 transition-colors hover:text-white md:gap-10 md:text-[15px]">
                       {name}<span className="h-1 w-1 rounded-full bg-[#FF3B30]" />
                     </span>
@@ -690,7 +690,7 @@ export default function App() {
       </section>
 
       {/* Partners & Collaborations / Trading Ecosystem */}
-      <section id="brokers" className="ecosystem-section relative overflow-hidden py-24 md:py-32">
+      <section id="brokers" className="ecosystem-section relative min-h-[100svh] overflow-hidden py-16 md:py-20">
         <div className="ecosystem-grid" />
         <div className="ecosystem-terrain" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
@@ -700,21 +700,28 @@ export default function App() {
             <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-[#A1A1AA] md:text-lg">Working alongside brokers, funded trading programs and tools that help our community trade, learn and grow.</p>
           </motion.div>
 
-          <div className="ecosystem-map mt-16 md:mt-20">
+          <div className="ecosystem-map mt-12 md:mt-14">
+            <svg className="ecosystem-routes" viewBox="0 0 1000 500" aria-hidden="true" preserveAspectRatio="none">
+              <path id="route-vt" d="M 230 145 C 365 145, 390 225, 500 250" />
+              <path id="route-ultima" d="M 230 355 C 365 355, 390 275, 500 250" />
+              <path id="route-bft" d="M 770 145 C 635 145, 610 225, 500 250" />
+              <path id="route-select" d="M 770 355 C 635 355, 610 275, 500 250" />
+              {['route-vt', 'route-ultima', 'route-bft', 'route-select'].map((route, index) => <circle key={route} className="route-pulse" r="4"><animateMotion dur="4s" begin={`${index * 0.75}s`} repeatCount="indefinite"><mpath href={`#${route}`} /></animateMotion></circle>)}
+            </svg>
             <div className="ecosystem-orbit orbit-one" /><div className="ecosystem-orbit orbit-two" /><div className="ecosystem-orbit orbit-three" />
-            <div className="ecosystem-connection connection-one" /><div className="ecosystem-connection connection-two" /><div className="ecosystem-connection connection-three" /><div className="ecosystem-connection connection-four" />
-            <div className="ecosystem-pulse pulse-one" /><div className="ecosystem-pulse pulse-two" /><div className="ecosystem-pulse pulse-three" /><div className="ecosystem-pulse pulse-four" />
-            <motion.div initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={revealViewport} transition={{ duration: 0.8 }} className="ecosystem-hub">
+            <motion.div initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={revealViewport} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="ecosystem-hub">
               <div className="ecosystem-hub-ring"><Logo size="large" /></div>
               <div className="ecosystem-hub-wordmark">INFINITY<br />TRADER</div>
             </motion.div>
             {[
-              { name: 'VT Markets', category: 'BROKER PARTNER', logo: '/brokers/vt-markets.webp', alt: 'VT Markets', position: 'node-vt' },
-              { name: 'Ultima Markets', category: 'BROKER PARTNER', logo: '/brokers/ultima-markets.jpg', alt: 'Ultima Markets', position: 'node-ultima' },
-              { name: 'Burmese Funded Trader', category: 'PROP TRADING PARTNER', logo: '/brokers/burmese-funded-trader.webp', alt: 'Burmese Funded Trader', position: 'node-bft' },
-              { name: 'Select2Notion', category: 'TRADING JOURNAL PLATFORM', logo: '/brokers/select2notion.jpg', alt: 'Select2Notion', position: 'node-select' },
+              { name: 'VT Markets', category: 'BROKER PARTNER', logo: '/brokers/vt-markets.webp', alt: 'VT Markets', position: 'node-vt', id: 'vt' },
+              { name: 'Ultima Markets', category: 'BROKER PARTNER', logo: '/brokers/ultima-markets.jpg', alt: 'Ultima Markets', position: 'node-ultima', id: 'ultima' },
+              { name: 'Burmese Funded Trader', category: 'PROP TRADING PARTNER', logo: '/brokers/burmese-funded-trader.webp', alt: 'Burmese Funded Trader', position: 'node-bft', id: 'bft' },
+              { name: 'Select2Notion', category: 'TRADING JOURNAL PLATFORM', logo: '/brokers/select2notion.jpg', alt: 'Select2Notion', position: 'node-select', id: 'select' },
             ].map((partner, index) => (
-              <motion.div key={partner.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: 0.12 * index, duration: 0.65 }} className={`ecosystem-node ${partner.position}`}>
+              <motion.div key={partner.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: 0.1 * index, duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className={`ecosystem-node ${partner.position}`}>
+                <div className="ecosystem-node-top"><span><i />COLLABORATION</span><b>NODE-{String(index + 1).padStart(2, '0')}</b></div>
+                <div className="ecosystem-node-corners" aria-hidden="true" />
                 <div className="ecosystem-logo-frame"><img src={partner.logo} alt={`${partner.alt} logo`} /></div>
                 <div className="ecosystem-node-label"><span>{partner.category.split(' ')[0]}</span> {partner.category.split(' ').slice(1).join(' ')}</div>
               </motion.div>
