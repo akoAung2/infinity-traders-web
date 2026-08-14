@@ -397,4 +397,38 @@
 .premium-marquee { margin-top:2rem; overflow:hidden; border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08); }.premium-marquee-track { display:flex; width:max-content; align-items:center; gap:1.5rem; padding:.8rem 0; color:#71717a; font:10px ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.18em; animation:premium-marquee 28s linear infinite; }.premium-marquee-track b { color:#ff3b30; font-size:7px; }
 @keyframes premium-breathe { 0%,100% { box-shadow:0 0 0 0 rgba(255,59,48,.04); } 50% { box-shadow:0 0 0 16px rgba(255,59,48,.04); } } @keyframes premium-blink { 0%,100% { opacity:.45; } 50% { opacity:1; } } @keyframes premium-marquee { to { transform:translateX(-50%); } }
 @media (max-width:1000px) { .premium-layout { grid-template-columns:1fr 1fr; }.premium-copy { grid-column:1/-1; }.premium-core { grid-column:1; grid-row:2; }.premium-features { grid-column:2; grid-row:2; }.premium-cta { grid-column:2; } }
-@media (max-width:640px) { .premium-coming-soon { min-height:0; padding:6rem 0 2rem; }.premium-layout { display:flex; flex-direction:column; align-items:stretch; gap:2rem; }.premium-copy { order:1; }.premium-core { order:2; width:min(100%,320px); align-self:center; }.premium-features { order:3; }.premium-cta { order:4; align-self:flex-start; }.premium-marquee { order:5; }.premium-feature { min-height:135px; padding:1rem; }.premium-feature h3 { margin-top:1.35rem; font-size:11px; }.premium-copy h2 { font-size:clamp(2.7rem,14vw,4rem); } }
+@media (max-width:767px) {
+  .premium-coming-soon { width:100%; max-width:100vw; min-height:0; padding:5.5rem 0 1.5rem; overflow:hidden; }
+  .premium-shell { width:100%; max-width:100%; box-sizing:border-box; padding-inline:20px; }
+  .premium-atmosphere { inset:0; background:radial-gradient(circle at 50% 55%,rgba(255,59,48,.1),transparent 55%),linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:auto,32px 32px,32px 32px; mask-image:none; }
+  .premium-layout { width:100%; max-width:100%; display:flex; flex-direction:column; align-items:center; gap:1.75rem; }
+  .premium-copy { width:100%; max-width:360px; order:1; align-self:center; text-align:center; }
+  .premium-kicker { justify-content:center; gap:.5rem; font-size:10px; letter-spacing:.18em; }
+  .premium-copy h2 { max-width:100%; margin:1.1rem auto 1.25rem; font-size:clamp(42px,12vw,64px); line-height:.95; letter-spacing:-.05em; overflow-wrap:break-word; word-break:normal; }
+  .premium-copy p { width:100%; max-width:340px; margin-inline:auto; font-size:15px; line-height:1.65; }
+  .premium-status { max-width:100%; margin-top:1.5rem; font-size:9px; letter-spacing:.1em; }
+  .premium-status span { margin-inline:.35rem; }
+  .premium-core { order:2; width:calc(100% - 32px); max-width:360px; box-sizing:border-box; aspect-ratio:1; align-self:center; box-shadow:0 0 0 1px rgba(255,59,48,.05),0 0 42px rgba(255,59,48,.08); }
+  .premium-core::before { inset:9px; }
+  .premium-core-label { top:1.15rem; font-size:8px; letter-spacing:.12em; }
+  .premium-logo-pulse { width:92px; height:92px; }
+  .premium-logo-pulse img { width:54px; height:54px; }
+  .premium-core-wordmark { margin-top:.8rem; font-size:11px; letter-spacing:.24em; }
+  .premium-core-meta { right:1rem; bottom:1rem; left:1rem; font-size:8px; letter-spacing:.06em; }
+  .premium-features { width:100%; max-width:360px; grid-template-columns:1fr; box-sizing:border-box; order:3; }
+  .premium-feature { min-height:0; padding:1rem; }
+  .premium-feature h3 { margin-top:1.15rem; font-size:12px; }
+  .premium-feature p { max-width:100%; font-size:11px; line-height:1.55; }
+  .premium-cta { order:4; width:100%; max-width:320px; min-height:52px; box-sizing:border-box; align-self:center; padding:.8rem 1rem; border-radius:10px; }
+  .premium-marquee { order:5; width:100%; max-width:100%; margin-top:.25rem; }
+  .premium-marquee-track { gap:1rem; padding:.7rem 0; font-size:8px; letter-spacing:.12em; animation-duration:34s; }
+}
+@media (max-width:480px) {
+  .premium-shell { padding-inline:16px; }
+  .premium-coming-soon { padding-top:5rem; }
+  .premium-layout { gap:1.5rem; }
+  .premium-core { width:calc(100% - 16px); }
+  .premium-feature { padding:.9rem; }
+  .premium-feature-top { font-size:9px; }
+}
+
