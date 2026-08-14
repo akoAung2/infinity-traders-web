@@ -18,7 +18,7 @@ import {
   Calendar,
   Send
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
 
 // --- Motion utilities ---
 
@@ -52,6 +52,23 @@ const useScrollDirection = () => {
 const revealViewport = { once: false, amount: 0.2, margin: '0px 0px -10% 0px' } as const;
 
 // --- Components ---
+
+const CinematicSection = ({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.45 });
+  const y = useTransform(progress, [0, 0.5, 1], [32, 0, -32]);
+  const opacity = useTransform(progress, [0, 0.16, 0.84, 1], [0.78, 1, 1, 0.78]);
+  const scale = useTransform(progress, [0, 0.5, 1], [0.985, 1, 0.985]);
+  const blur = useTransform(progress, [0, 0.18, 0.82, 1], [2, 0, 0, 2]);
+
+  return (
+    <motion.div ref={ref} id={id} className={`cinematic-chapter ${className}`} style={{ y, opacity, scale, filter: blur }}>
+      <div className="cinematic-chapter-scan" aria-hidden="true" />
+      {children}
+    </motion.div>
+  );
+};
 
 const Logo = ({ size = "normal" }: { size?: "small" | "normal" | "large" }) => {
   const dimensions = size === "small" ? "w-8 h-8" : size === "large" ? "w-16 h-16" : "w-10 h-10";
@@ -474,6 +491,7 @@ export default function App() {
       <Navbar />
 
       {/* Hero Section */}
+      <CinematicSection className="cinematic-hero">
       <section className="hero-section relative min-h-[90vh] overflow-hidden bg-[#050505]">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_35%_at_50%_35%,rgba(255,106,42,0.035),transparent_75%)]" />
@@ -563,9 +581,11 @@ export default function App() {
           </div>
         </div>
       </section>
+      </CinematicSection>
 
       {/* Purpose Section */}
-      <section id="purpose" className="py-24 bg-stone-950/50">
+      <CinematicSection id="purpose" className="cinematic-purpose">
+      <section className="py-24 bg-stone-950/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -616,9 +636,11 @@ export default function App() {
           </div>
         </div>
       </section>
+      </CinematicSection>
 
       {/* Systems Section */}
-      <section id="systems" className="trading-systems-section relative overflow-hidden">
+      <CinematicSection id="systems" className="cinematic-systems">
+      <section className="trading-systems-section relative overflow-hidden">
         <div className="systems-technical-bg" aria-hidden="true"><div className="systems-radar" /><div className="systems-chart-line" /></div>
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-28">
           <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="systems-header">
@@ -637,9 +659,11 @@ export default function App() {
           <div className="benefits-strip">{[['100% FREE', 'All systems and lessons are completely free.'], ['HIGH QUALITY', 'Structured trading education.'], ['PRACTICAL LEARNING', 'Real market concepts and implementation.'], ['FOR EVERY TRADER', 'Beginners to advanced, everyone can learn.']].map(([title, text]) => <div key={title}><span>◆</span><strong>{title}</strong><p>{text}</p></div>)}</div>
         </div>
       </section>
+      </CinematicSection>
 
       {/* Premium Section */}
-      <section id="premium" className="premium-coming-soon relative overflow-hidden">
+      <CinematicSection id="premium" className="cinematic-premium">
+      <section className="premium-coming-soon relative overflow-hidden">
         <div className="premium-atmosphere" aria-hidden="true" />
         <div className="premium-shell relative z-10 mx-auto max-w-7xl px-6 md:px-10">
           <div className="premium-layout">
@@ -677,9 +701,11 @@ export default function App() {
           </div>
         </div>
       </section>
+      </CinematicSection>
 
       {/* Partners & Collaborations / Trading Ecosystem */}
-      <section id="brokers" className="ecosystem-section relative min-h-[100svh] overflow-hidden py-16 md:py-20">
+      <CinematicSection id="brokers" className="cinematic-brokers">
+      <section className="ecosystem-section relative min-h-[100svh] overflow-hidden py-16 md:py-20">
         <div className="ecosystem-grid" />
         <div className="ecosystem-terrain" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
@@ -727,7 +753,9 @@ export default function App() {
           </div>
         </div>
       </section>
+      </CinematicSection>
 
+      <CinematicSection id="live-account" className="cinematic-live-account">
       <div id="live-account" className="broker-access-section relative overflow-hidden px-6 py-24 md:px-10 md:py-36">
         <div className="broker-access-atmosphere" />
         <div className="broker-access-grid" />
@@ -752,9 +780,11 @@ export default function App() {
           <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-[9px] leading-relaxed text-[#52525B] md:text-[10px]">Trading conditions, spreads, commissions and availability may vary by region, account type and market conditions.</p>
         </div>
       </div>
+      </CinematicSection>
 
       {/* Contact Section */}
-      <section id="contact" className="relative py-28 md:py-36 overflow-hidden">
+      <CinematicSection id="contact" className="cinematic-contact">
+      <section className="relative py-28 md:py-36 overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #050505 0%, #0d0808 35%, #120a07 60%, #080505 100%)' }} />
         <div 
@@ -858,6 +888,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      </CinematicSection>
 
       {/* Footer */}
       <footer className="py-12 border-t border-white/10">
