@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   TrendingUp, 
   BookOpen, 
@@ -17,7 +17,65 @@ import {
   Calendar,
   Send
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useInView } from 'motion/react';
+
+type ScrollDirection = 'up' | 'down';
+
+const useScrollDirection = (threshold = 12) => {
+  const [direction, setDirection] = useState<ScrollDirection>('down');
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const updateDirection = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+      if (Math.abs(delta) >= threshold) {
+        setDirection(delta > 0 ? 'down' : 'up');
+        lastScrollY.current = currentY;
+      }
+      ticking.current = false;
+    };
+    const onScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateDirection);
+        ticking.current = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [threshold]);
+
+  return direction;
+};
+
+const revealVariants = {
+  hidden: (direction: ScrollDirection) => ({ opacity: 0, y: direction === 'down' ? 24 : -24, filter: 'blur(4px)' }),
+  visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  exit: (direction: ScrollDirection) => ({ opacity: 0, y: direction === 'down' ? -16 : 16, filter: 'blur(3px)' }),
+};
+
+const ScrollReveal = ({ children, className = '', delay = 0, amount = 0.2, once = false }: { children: React.ReactNode; className?: string; delay?: number; amount?: number; once?: boolean }) => {
+  const direction = useScrollDirection();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount, once });
+  return (
+    <motion.div
+      ref={ref}
+      custom={direction}
+      variants={revealVariants}
+      initial="hidden"
+      animate={inView ? 'visible' : 'hidden'}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const staggerContainer = { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } };
+const staggerItem = { hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } };
 
 // --- Components ---
 
@@ -240,33 +298,22 @@ const ContactForm = () => {
 };
 
 const SectionHeading = ({ title, subtitle, centered = true }: { title: string; subtitle?: string; centered?: boolean }) => (
-  <div className={`mb-12 ${centered ? 'text-center' : 'text-left'}`}>
-    <motion.h2 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-3xl md:text-4xl font-bold mb-4"
-    >
+  <ScrollReveal className={`mb-12 ${centered ? 'text-center' : 'text-left'}`}>
+    <motion.h2 variants={staggerItem} className="text-3xl md:text-4xl font-bold mb-4">
       {title}
     </motion.h2>
-    {subtitle && (
-      <motion.p 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="text-white/60 max-w-2xl mx-auto"
-      >
-        {subtitle}
-      </motion.p>
-    )}
+    {subtitle && <motion.p variants={staggerItem} transition={{ delay: 0.1 }} className="text-white/60 max-w-2xl mx-auto">
+      {subtitle}
+    </motion.p>}
     <div className={`h-1 w-20 bg-red-500 mt-6 ${centered ? 'mx-auto' : ''} rounded-full`} />
-  </div>
+  </ScrollReveal>
 );
 
 const SystemCard = ({ title, description, icon: Icon, buttonText, href }: { title: string; description: string; icon: any; buttonText: string; href: string }) => (
   <motion.div 
-    whileHover={{ y: -10 }}
+    whileHover={{ y: -4, scale: 1.01 }}
+    whileTap={{ scale: 0.99 }}
+    variants={staggerItem}
     className="glass p-8 rounded-3xl flex flex-col h-full red-glow-hover transition-all duration-300"
   >
     <div className="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6 border border-red-500/20">
@@ -543,7 +590,7 @@ export default function App() {
             subtitle="Choose the system that fits your personality and master the markets with professional precision."
           />
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.15 }} className="grid md:grid-cols-3 gap-8">
             <SystemCard 
               icon={TrendingUp}
               title="SMC (Smart Money Concept)"
@@ -565,7 +612,7 @@ export default function App() {
               buttonText="Explore SNR Theory"
               href="https://t.me/c/3540469523/22"
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
