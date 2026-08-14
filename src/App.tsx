@@ -667,20 +667,15 @@ export default function App() {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="aspect-square rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart1/400/400" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
-                  </div>
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart2/400/500" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
-                  </div>
+                <div className="aspect-[4/5] overflow-hidden rounded-2xl">
+                  <img src="/images/premium-inf-b2.png" alt="Infinity Trader community and platform ecosystem" className="h-full w-full object-cover opacity-85" />
                 </div>
                 <div className="space-y-4 pt-8">
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart3/400/500" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
+                  <div className="aspect-[4/5] overflow-hidden rounded-2xl">
+                    <img src="/images/premium-skills.png" alt="Infinity Traders skills and profit message with broker partners" className="h-full w-full object-cover opacity-85" />
                   </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart4/400/400" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
+                  <div className="aspect-[4/5] overflow-hidden rounded-2xl">
+                    <img src="/images/premium-community.png" alt="Infinity Trader community and brand partnerships" className="h-full w-full object-cover opacity-85" />
                   </div>
                 </div>
               </div>
