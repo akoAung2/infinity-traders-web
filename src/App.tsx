@@ -296,6 +296,27 @@ const SectionHeading = ({ title, subtitle, centered = true }: { title: string; s
   </div>
 );
 
+type TradingSystem = { id: string; title: string; subtitle: string; points: string[]; href: string; type: 'smc' | 'ict' | 'snr' };
+
+const SystemVisualization = ({ type }: { type: TradingSystem['type'] }) => (
+  <div className={`system-visual system-visual-${type}`} aria-hidden="true">
+    <div className="system-visual-grid" />
+    {type === 'smc' && <svg viewBox="0 0 360 150" role="presentation"><path className="visual-line" d="M12 112 L62 92 L94 106 L130 62 L166 78 L204 38 L244 54 L280 25 L348 42" /><path className="visual-guide" d="M12 126 H348 M26 84 H348" /><circle className="visual-node" cx="204" cy="38" r="4" /><text x="215" y="32">BOS</text><text x="25" y="79">LIQUIDITY</text></svg>}
+    {type === 'ict' && <svg viewBox="0 0 360 150" role="presentation"><path className="visual-guide" d="M18 120 H342 M72 28 V130 M180 28 V130 M288 28 V130" /><path className="visual-line" d="M18 101 L60 96 L104 102 L146 58 L180 72 L214 43 L258 82 L298 55 L342 64" /><circle className="visual-node" cx="214" cy="43" r="4" /><text x="48" y="24">LONDON</text><text x="156" y="24">NY OPEN</text><text x="276" y="24">NY CLOSE</text></svg>}
+    {type === 'snr' && <svg viewBox="0 0 360 150" role="presentation"><path className="visual-zone" d="M18 42 H342 M18 108 H342" /><path className="visual-guide" d="M18 75 H342" /><path className="visual-line" d="M18 84 L62 80 L104 86 L142 67 L176 72 L214 92 L248 57 L286 65 L342 30" /><circle className="visual-node" cx="248" cy="57" r="4" /><text x="24" y="36">RESISTANCE</text><text x="24" y="126">SUPPORT</text></svg>}
+  </div>
+);
+
+const TradingSystemCard = ({ system, index }: { system: TradingSystem; index: number; key?: string }) => (
+  <motion.article initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} className="trading-system-card">
+    <div className="system-card-top"><span>SYSTEM {system.id}</span><b><i /> FREE</b></div>
+    <h3>{system.title}</h3><div className="system-card-subtitle">{system.subtitle}</div>
+    <SystemVisualization type={system.type} />
+    <ul>{system.points.map((point) => <li key={point}><span />{point}</li>)}</ul>
+    <div className="system-card-footer"><strong>100% FREE</strong><a href={system.href} target="_blank" rel="noopener noreferrer">Explore System <ArrowRight /></a></div>
+  </motion.article>
+);
+
 const SystemCard = ({ title, description, icon: Icon, buttonText, href }: { title: string; description: string; icon: any; buttonText: string; href: string }) => (
   <motion.div 
     whileHover={{ y: -10 }}
@@ -597,36 +618,23 @@ export default function App() {
       </section>
 
       {/* Systems Section */}
-      <section id="systems" className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeading 
-            title="Master Proven Trading Systems" 
-            subtitle="Choose the system that fits your personality and master the markets with professional precision."
-          />
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <SystemCard 
-              icon={TrendingUp}
-              title="SMC (Smart Money Concept)"
-              description="Learn institutional trading concepts in structured modules. Understand how big banks move the markets."
-              buttonText="Start Learning SMC"
-              href="https://t.me/c/3540469523/16"
-            />
-            <SystemCard 
-              icon={Video}
-              title="ICT (Inner Circle Trader)"
-              description="Advanced liquidity and market structure training. Master time and price theory for high-probability setups."
-              buttonText="Learn ICT"
-              href="https://t.me/c/3540469523/24"
-            />
-            <SystemCard 
-              icon={ShieldCheck}
-              title="SNR (Support & Resistance)"
-              description="Master strong price reaction zones and entry models. The foundation of technical analysis refined for modern markets."
-              buttonText="Explore SNR Theory"
-              href="https://t.me/c/3540469523/22"
-            />
+      <section id="systems" className="trading-systems-section relative overflow-hidden">
+        <div className="systems-technical-bg" aria-hidden="true"><div className="systems-radar" /><div className="systems-chart-line" /></div>
+        <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-28">
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="systems-header">
+            <div className="systems-label"><span /> FREE TRADING EDUCATION</div>
+            <h2>Master Proven<br /><em>Trading Systems.</em></h2>
+            <p>Structured trading frameworks built to help you read the market with clarity, precision and discipline.</p>
+            <div className="free-education-panel"><div className="free-panel-icon">%</div><div><strong><b>100%</b> FREE EDUCATION</strong><span>Every system. No payment required.</span></div><i /></div>
+          </motion.div>
+          <div className="trading-systems-grid">
+            {([
+              { id: '01', title: 'SMC', subtitle: 'Smart Money Concept', type: 'smc', href: 'https://t.me/c/3540469523/16', points: ['Market Structure', 'Liquidity Concepts', 'Institutional Order Flow'] },
+              { id: '02', title: 'ICT', subtitle: 'Inner Circle Trader', type: 'ict', href: 'https://t.me/c/3540469523/24', points: ['Session Timing', 'Liquidity Sweeps', 'Price Delivery'] },
+              { id: '03', title: 'SNR', subtitle: 'Support & Resistance', type: 'snr', href: 'https://t.me/c/3540469523/22', points: ['Key Reaction Zones', 'Clean Price Action', 'Entry & Exit Models'] }
+            ] as TradingSystem[]).map((system, index) => <TradingSystemCard key={system.id} system={system} index={index} />)}
           </div>
+          <div className="benefits-strip">{[['100% FREE', 'All systems and lessons are completely free.'], ['HIGH QUALITY', 'Structured trading education.'], ['PRACTICAL LEARNING', 'Real market concepts and implementation.'], ['FOR EVERY TRADER', 'Beginners to advanced, everyone can learn.']].map(([title, text]) => <div key={title}><span>◆</span><strong>{title}</strong><p>{text}</p></div>)}</div>
         </div>
       </section>
 
