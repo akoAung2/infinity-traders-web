@@ -677,9 +677,6 @@ export default function App() {
                   <div className="aspect-[4/5] overflow-hidden rounded-2xl">
                     <img src="/images/premium-community.png" alt="Infinity Trader community and brand partnerships" className="h-full w-full object-cover opacity-85" />
                   </div>
-                  <div className="aspect-[4/5] overflow-hidden rounded-2xl">
-                    <img src="/images/premium-trading-systems.png" alt="Infinity Trader trading systems, profits, and lessons from losses" className="h-full w-full object-cover opacity-85" />
-                  </div>
                 </div>
               </div>
             </div>
