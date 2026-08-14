@@ -667,7 +667,7 @@ export default function App() {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="overflow-hidden rounded-2xl bg-black/40">
+                <div className="overflow-hidden rounded-2xl bg-black/40" style={{ paddingBottom: '-11px', marginBottom: '404px' }}>
                   <img src="/images/premium-inf-b2.png" alt="Infinity Trader community and platform ecosystem" className="w-full object-contain opacity-85" />
                 </div>
                 <div className="space-y-4 pt-8">
