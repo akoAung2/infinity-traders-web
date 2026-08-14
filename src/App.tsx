@@ -581,10 +581,10 @@ export default function App() {
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden glass p-2">
                 <img 
-                  src="/images/purpose.png" 
-                  alt="Infinity Trader platform with a trading dashboard and market chart" 
-                  className="w-full h-full object-cover rounded-xl opacity-100 border border-white/20"
-                  style={{ marginTop: '4px' }}
+              src="/images/purpose-community.png"
+              alt="Infinity Traders community and brand partnerships"
+              className="w-full h-full object-contain rounded-xl opacity-100 border border-white/20"
+              style={{ marginTop: '4px' }}
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 glass p-6 rounded-2xl red-glow animate-float">
