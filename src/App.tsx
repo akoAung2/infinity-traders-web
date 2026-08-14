@@ -701,15 +701,15 @@ export default function App() {
           </motion.div>
 
           <div className="ecosystem-map mt-12 md:mt-14">
-            <svg className="ecosystem-routes" viewBox="0 0 1000 500" aria-hidden="true" preserveAspectRatio="none">
-              <path id="route-vt" d="M 230 145 C 365 145, 390 225, 500 250" />
-              <path id="route-ultima" d="M 230 355 C 365 355, 390 275, 500 250" />
-              <path id="route-bft" d="M 770 145 C 635 145, 610 225, 500 250" />
-              <path id="route-select" d="M 770 355 C 635 355, 610 275, 500 250" />
+            <svg className="ecosystem-routes" viewBox="0 0 1000 380" aria-hidden="true" preserveAspectRatio="none">
+              <path id="route-vt" d="M 230 70 C 330 70, 365 140, 401 146" />
+              <path id="route-ultima" d="M 230 310 C 330 310, 365 240, 401 234" />
+              <path id="route-bft" d="M 770 70 C 670 70, 635 140, 599 146" />
+              <path id="route-select" d="M 770 310 C 670 310, 635 240, 599 234" />
               {['route-vt', 'route-ultima', 'route-bft', 'route-select'].map((route, index) => <circle key={route} className="route-pulse" r="4"><animateMotion dur="4s" begin={`${index * 0.75}s`} repeatCount="indefinite"><mpath href={`#${route}`} /></animateMotion></circle>)}
             </svg>
             <div className="ecosystem-orbit orbit-one" /><div className="ecosystem-orbit orbit-two" /><div className="ecosystem-orbit orbit-three" />
-            <motion.div initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={revealViewport} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="ecosystem-hub">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={revealViewport} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="ecosystem-hub">
               <div className="ecosystem-hub-ring"><Logo size="large" /></div>
               <div className="ecosystem-hub-wordmark">INFINITY<br />TRADER</div>
             </motion.div>
@@ -720,8 +720,7 @@ export default function App() {
               { name: 'Select2Notion', category: 'TRADING JOURNAL PLATFORM', logo: '/brokers/select2notion.jpg', alt: 'Select2Notion', position: 'node-select', id: 'select' },
             ].map((partner, index) => (
               <motion.div key={partner.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: 0.1 * index, duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className={`ecosystem-node ${partner.position}`}>
-                <div className="ecosystem-node-top"><span><i />COLLABORATION</span><b>NODE-{String(index + 1).padStart(2, '0')}</b></div>
-                <div className="ecosystem-node-corners" aria-hidden="true" />
+                <div className="ecosystem-node-top"><span><i />COLLABORATION</span></div>
                 <div className="ecosystem-logo-frame"><img src={partner.logo} alt={`${partner.alt} logo`} /></div>
                 <div className="ecosystem-node-label"><span>{partner.category.split(' ')[0]}</span> {partner.category.split(' ').slice(1).join(' ')}</div>
               </motion.div>
