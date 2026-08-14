@@ -504,10 +504,9 @@ export default function App() {
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden glass p-2">
                 <img 
-                  src="https://picsum.photos/seed/trading/800/800" 
-                  alt="Trading Purpose" 
-                  className="w-full h-full object-cover rounded-2xl opacity-80"
-                  referrerPolicy="no-referrer"
+                  src="/images/purpose.png" 
+                  alt="Infinity Trader platform with a trading dashboard and market chart" 
+                  className="w-full h-full object-cover rounded-2xl opacity-90"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 glass p-6 rounded-2xl red-glow animate-float">
