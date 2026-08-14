@@ -125,7 +125,7 @@ const Navbar = () => {
   );
 };
 
-const CONTACT_EMAIL = 'infinitytraders@gmail.com';
+const CONTACT_EMAIL = 'iinfinitytraders@gmail.com';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -712,9 +712,9 @@ export default function App() {
                 {[
                   { 
                     label: 'Email Us', 
-                    detail: 'infinitytraders@gmail.com', 
+                    detail: 'iinfinitytraders@gmail.com', 
                     icon: Mail, 
-                    href: 'mailto:infinitytraders@gmail.com',
+                    href: 'mailto:iinfinitytraders@gmail.com',
                     iconBg: 'bg-red-500/15',
                     iconColor: 'text-red-400',
                   },
