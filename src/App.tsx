@@ -7,6 +7,8 @@ import {
   ChevronRight, 
   ArrowRight, 
   ExternalLink,
+  ArrowUpRight,
+  Check,
   MessageCircle,
   Video,
   Mail,
@@ -339,28 +341,104 @@ const BrokerCard = ({ name, year, awards, description, logo: Logo }: { name: str
   </div>
 );
 
-const BrokerActionBlock = ({ name, liveUrl, guideUrl }: { name: string; liveUrl: string; guideUrl: string }) => (
-  <div className="glass p-8 rounded-3xl text-center">
-    <h3 className="text-2xl font-bold mb-6">{name}</h3>
-    <div className="flex flex-col gap-4">
-      <a 
-        href={liveUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="bg-red-500 hover:bg-red-600 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-red-500/20 active:scale-95 flex items-center justify-center gap-2"
-      >
-        Open Live Account <ExternalLink className="w-4 h-4" />
-      </a>
-      <a 
-        href={guideUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="bg-white/5 hover:bg-white/10 text-white py-4 rounded-xl font-bold transition-all border border-white/10 flex items-center justify-center gap-2"
-      >
-        Account Opening Guideline <BookOpen className="w-4 h-4" />
-      </a>
+type AccountOption = {
+  name: string;
+  spread: string;
+  commission: string;
+  minDeposit?: string;
+};
+
+type BrokerAccess = {
+  id: string;
+  name: string;
+  logo: string;
+  logoAlt: string;
+  tagline: string;
+  platforms: string[];
+  accounts: AccountOption[];
+  ctaUrl: string;
+};
+
+const brokerAccess: BrokerAccess[] = [
+  {
+    id: 'vt-markets',
+    name: 'VT Markets',
+    logo: '/brokers/vt-markets.webp',
+    logoAlt: 'VT Markets logo',
+    tagline: 'Global Market Access',
+    platforms: ['MT4', 'MT5', 'TradingView', 'WebTrader'],
+    accounts: [
+      { name: 'Standard STP', spread: 'From 1.2 pips', commission: '$0' },
+      { name: 'Raw ECN', spread: 'From 0.0 pips', commission: '$6 round turn' },
+    ],
+    ctaUrl: 'https://www.vtmarkets.com/trade-now/?affid=22393651',
+  },
+  {
+    id: 'ultima-markets',
+    name: 'Ultima Markets',
+    logo: '/brokers/ultima-markets.jpg',
+    logoAlt: 'Ultima Markets logo',
+    tagline: 'Multi-Asset Market Access',
+    platforms: ['MT4', 'MT5', 'WebTrader'],
+    accounts: [
+      { name: 'Standard', spread: 'From 1.0 pips', commission: '$0', minDeposit: '$20' },
+      { name: 'ECN', spread: 'From 0.0 pips', commission: '$5' },
+    ],
+    ctaUrl: 'https://ultgo.com/la-com/BavQ65KR',
+  },
+];
+
+const AccountOption = ({ account }: { account: AccountOption; key?: React.Key }) => (
+  <div className="broker-account-option">
+    <div className="mb-4 flex items-center justify-between gap-3">
+      <h4 className="text-sm font-semibold text-[#F5F5F5]">{account.name}</h4>
+      <Check className="h-4 w-4 text-[#FF4D3D]" />
+    </div>
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div><div className="broker-spec-label">Spread</div><div className="broker-spec-value">{account.spread}</div></div>
+      <div><div className="broker-spec-label">Commission</div><div className="broker-spec-value">{account.commission}</div></div>
+      {account.minDeposit && <div><div className="broker-spec-label">Min deposit</div><div className="broker-spec-value">{account.minDeposit}</div></div>}
     </div>
   </div>
+);
+
+const BrokerActionBlock = ({ broker, index }: { broker: BrokerAccess; index: number; key?: React.Key }) => (
+  <motion.article
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={revealViewport}
+    transition={{ delay: index * 0.1, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+    className="broker-access-card group"
+  >
+    <div className="broker-card-glow" />
+    <div className="broker-card-accent" />
+    <div className="relative z-10 flex h-full flex-col">
+      <div className="flex items-start justify-between gap-6">
+        <div className="broker-logo-wrap">
+          <img src={broker.logo} alt={broker.logoAlt} className="broker-logo" />
+        </div>
+        <ArrowUpRight className="h-5 w-5 text-[#71717A] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#FF4D3D]" />
+      </div>
+      <div className="mt-5">
+        <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-[#71717A]">{broker.tagline}</h3>
+      </div>
+      <div className="mt-8">
+        <div className="broker-section-label">Account options</div>
+        <div className="mt-3 flex flex-col gap-3">
+          {broker.accounts.map((account) => <AccountOption key={account.name} account={account} />)}
+        </div>
+      </div>
+      <div className="mt-7">
+        <div className="broker-section-label">Platforms</div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {broker.platforms.map((platform) => <span key={platform} className="broker-platform-chip">{platform}</span>)}
+        </div>
+      </div>
+      <a href={broker.ctaUrl} target="_blank" rel="noopener noreferrer" className="broker-cta mt-8">
+        Open Live Account <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+      </a>
+    </div>
+  </motion.article>
 );
 
 // --- Main App ---
@@ -637,22 +715,29 @@ export default function App() {
             />
           </div>
 
-          <SectionHeading 
-            title="Open Your Live Trading Account" 
-            subtitle="Start your professional trading journey today with our trusted partners."
-          />
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <BrokerActionBlock 
-              name="Ultima Markets"
-              liveUrl="https://ultgo.com/la-com/BavQ65KR"
-              guideUrl="#"
-            />
-            <BrokerActionBlock 
-              name="VT Markets"
-              liveUrl="https://www.vtmarkets.com/trade-now/?affid=22393651"
-              guideUrl="#"
-            />
+          <div id="live-account" className="broker-access-section relative -mx-6 overflow-hidden px-6 py-24 md:-mx-10 md:px-10 md:py-36">
+            <div className="broker-access-atmosphere" />
+            <div className="broker-access-grid" />
+            <div className="relative z-10 mx-auto max-w-7xl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={revealViewport}
+                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                className="mx-auto max-w-2xl text-center"
+              >
+                <div className="broker-eyebrow"><span className="h-1.5 w-1.5 rounded-full bg-[#FF3B30]" />Live Account Access</div>
+                <h2 className="mt-5 text-balance text-4xl font-bold tracking-[-0.04em] text-[#F5F5F5] md:text-6xl">Open Your Live Account.</h2>
+                <p className="mt-6 text-pretty text-base leading-relaxed text-[#A1A1AA] md:text-lg">Choose the trading setup that fits your strategy, platform and trading conditions.</p>
+                <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.08em] text-[#71717A] md:text-[11px]">
+                  <span className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-[#FF3B30]" />Broker Access</span><span>MT4 · MT5</span><span>Global Markets</span>
+                </div>
+              </motion.div>
+              <div className="mt-14 grid gap-5 md:grid-cols-2">
+                {brokerAccess.map((broker, index) => <BrokerActionBlock key={broker.id} broker={broker} index={index} />)}
+              </div>
+              <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-[9px] leading-relaxed text-[#52525B] md:text-[10px]">Trading conditions, spreads, commissions and availability may vary by region, account type and market conditions.</p>
+            </div>
           </div>
         </div>
       </section>
