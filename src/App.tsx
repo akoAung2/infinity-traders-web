@@ -6,7 +6,6 @@ import {
   ShieldCheck, 
   ChevronRight, 
   ArrowRight, 
-  ExternalLink,
   ArrowUpRight,
   Check,
   MessageCircle,
@@ -690,54 +689,46 @@ export default function App() {
         </div>
       </section>
 
-      {/* Brokers Section */}
-      <section id="brokers" className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeading 
-            title="Our Broker Collaborations" 
-            subtitle="We partner with world-class brokers to ensure our community gets the best trading conditions, lowest spreads, and fastest execution."
-          />
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-20">
-            <BrokerCard 
-              name="VT Markets"
-              year="2015"
-              awards={["Best ECN Broker 2023", "Fastest Growing Broker", "Top Tier Liquidity"]}
-              description="A global multi-asset broker providing traders with access to 1000+ financial instruments. Known for its robust technology and competitive spreads."
-              logo={Globe}
-            />
-            <BrokerCard 
-              name="Ultima Markets"
-              year="2016"
-              awards={["Most Transparent Broker", "Best Customer Support", "Innovation in Trading"]}
-              description="An international brokerage firm dedicated to providing a premium trading environment with cutting-edge tools and deep market liquidity."
-              logo={Globe}
-            />
+      {/* Partners & Collaborations / Trading Ecosystem */}
+      <section id="brokers" className="ecosystem-section relative overflow-hidden py-24 md:py-32">
+        <div className="ecosystem-grid" />
+        <div className="ecosystem-terrain" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
+            <div className="ecosystem-eyebrow"><span>03</span><i />PARTNERS &amp; COLLABORATIONS</div>
+            <h2 className="mt-7 text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.05em] text-[#F5F5F5] md:text-7xl">Built With The<br /><span>Trading Ecosystem.</span></h2>
+            <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-[#A1A1AA] md:text-lg">Working alongside brokers, funded trading programs and tools that help our community trade, learn and grow.</p>
+          </motion.div>
+
+          <div className="ecosystem-map mt-16 md:mt-20">
+            <div className="ecosystem-orbit orbit-one" /><div className="ecosystem-orbit orbit-two" /><div className="ecosystem-orbit orbit-three" />
+            <div className="ecosystem-connection connection-one" /><div className="ecosystem-connection connection-two" /><div className="ecosystem-connection connection-three" /><div className="ecosystem-connection connection-four" />
+            <div className="ecosystem-pulse pulse-one" /><div className="ecosystem-pulse pulse-two" /><div className="ecosystem-pulse pulse-three" /><div className="ecosystem-pulse pulse-four" />
+            <motion.div initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={revealViewport} transition={{ duration: 0.8 }} className="ecosystem-hub">
+              <div className="ecosystem-hub-ring"><Logo size="large" /></div>
+              <div className="ecosystem-hub-wordmark">INFINITY<br />TRADER</div>
+            </motion.div>
+            {[
+              { name: 'VT Markets', category: 'BROKER PARTNER', logo: '/brokers/vt-markets.webp', alt: 'VT Markets', position: 'node-vt' },
+              { name: 'Ultima Markets', category: 'BROKER PARTNER', logo: '/brokers/ultima-markets.jpg', alt: 'Ultima Markets', position: 'node-ultima' },
+              { name: 'Burmese Funded Trader', category: 'PROP TRADING PARTNER', logo: '/brokers/burmese-funded-trader.webp', alt: 'Burmese Funded Trader', position: 'node-bft' },
+              { name: 'Select2Notion', category: 'TRADING JOURNAL PLATFORM', logo: '/brokers/select2notion.jpg', alt: 'Select2Notion', position: 'node-select' },
+            ].map((partner, index) => (
+              <motion.div key={partner.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: 0.12 * index, duration: 0.65 }} className={`ecosystem-node ${partner.position}`}>
+                <div className="ecosystem-logo-frame"><img src={partner.logo} alt={`${partner.alt} logo`} /></div>
+                <div className="ecosystem-node-label"><span>{partner.category.split(' ')[0]}</span> {partner.category.split(' ').slice(1).join(' ')}</div>
+              </motion.div>
+            ))}
           </div>
 
-          <div id="live-account" className="broker-access-section relative -mx-6 overflow-hidden px-6 py-24 md:-mx-10 md:px-10 md:py-36">
-            <div className="broker-access-atmosphere" />
-            <div className="broker-access-grid" />
-            <div className="relative z-10 mx-auto max-w-7xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={revealViewport}
-                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                className="mx-auto max-w-2xl text-center"
-              >
-                <div className="broker-eyebrow"><span className="h-1.5 w-1.5 rounded-full bg-[#FF3B30]" />Live Account Access</div>
-                <h2 className="mt-5 text-balance text-4xl font-bold tracking-[-0.04em] text-[#F5F5F5] md:text-6xl">Open Your Live Account.</h2>
-                <p className="mt-6 text-pretty text-base leading-relaxed text-[#A1A1AA] md:text-lg">Choose the trading setup that fits your strategy, platform and trading conditions.</p>
-                <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.08em] text-[#71717A] md:text-[11px]">
-                  <span className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-[#FF3B30]" />Broker Access</span><span>MT4 · MT5</span><span>Global Markets</span>
-                </div>
-              </motion.div>
-              <div className="mt-14 grid gap-5 md:grid-cols-2">
-                {brokerAccess.map((broker, index) => <BrokerActionBlock key={broker.id} broker={broker} index={index} />)}
-              </div>
-              <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-[9px] leading-relaxed text-[#52525B] md:text-[10px]">Trading conditions, spreads, commissions and availability may vary by region, account type and market conditions.</p>
-            </div>
+          <div className="ecosystem-statement"><span>DIFFERENT PLATFORMS.</span><strong>ONE TRADING ECOSYSTEM.</strong></div>
+
+          <div className="ecosystem-marquee-header"><span><i />OUR PARTNERS</span><span>TRUSTED COLLABORATIONS</span></div>
+          <div className="ecosystem-marquee"><div className="ecosystem-marquee-track">{[0, 1].map((copy) => <div key={copy} className="ecosystem-marquee-copy">{['VT Markets', 'Ultima Markets', 'Burmese Funded Trader', 'Select2Notion'].map((name) => <span key={`${copy}-${name}`}>{name}<b>•</b></span>)}</div>)}</div></div>
+          <div className="ecosystem-auto-loop">AUTO LOOP <i /></div>
+
+          <div className="ecosystem-benefits">
+            {[{ icon: ShieldCheck, title: 'TRUSTED PARTNERS', text: 'We collaborate only with established trading entities.' }, { icon: Users, title: 'STRONG RELATIONSHIPS', text: 'Long-term relationships built around transparency and value.' }, { icon: Award, title: 'MORE OPPORTUNITIES', text: 'More access, more tools and more opportunities for traders.' }, { icon: TrendingUp, title: 'COMMUNITY FIRST', text: 'Everything we build is designed around our community.' }].map((benefit) => <div key={benefit.title} className="ecosystem-benefit"><benefit.icon /><div><h3>{benefit.title}</h3><p>{benefit.text}</p></div></div>)}
           </div>
         </div>
       </section>
