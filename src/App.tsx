@@ -739,6 +739,31 @@ export default function App() {
         </div>
       </section>
 
+      <div id="live-account" className="broker-access-section relative overflow-hidden px-6 py-24 md:px-10 md:py-36">
+        <div className="broker-access-atmosphere" />
+        <div className="broker-access-grid" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={revealViewport}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-2xl text-center"
+          >
+            <div className="broker-eyebrow"><span className="h-1.5 w-1.5 rounded-full bg-[#FF3B30]" />Live Account Access</div>
+            <h2 className="mt-5 text-balance text-4xl font-bold tracking-[-0.04em] text-[#F5F5F5] md:text-6xl">Open Your Live Account.</h2>
+            <p className="mt-6 text-pretty text-base leading-relaxed text-[#A1A1AA] md:text-lg">Choose the trading setup that fits your strategy, platform and trading conditions.</p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.08em] text-[#71717A] md:text-[11px]">
+              <span className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-[#FF3B30]" />Broker Access</span><span>MT4 · MT5</span><span>Global Markets</span>
+            </div>
+          </motion.div>
+          <div className="mt-14 grid gap-5 md:grid-cols-2">
+            {brokerAccess.map((broker, index) => <BrokerActionBlock key={broker.id} broker={broker} index={index} />)}
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-[9px] leading-relaxed text-[#52525B] md:text-[10px]">Trading conditions, spreads, commissions and availability may vary by region, account type and market conditions.</p>
+        </div>
+      </div>
+
       {/* Contact Section */}
       <section id="contact" className="relative py-28 md:py-36 overflow-hidden">
         {/* Background layers */}
