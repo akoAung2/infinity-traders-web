@@ -581,10 +581,10 @@ export default function App() {
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden glass p-2">
                 <img 
-                  src="/images/purpose.png" 
-                  alt="Infinity Trader platform with a trading dashboard and market chart" 
-                  className="w-full h-full object-cover rounded-xl opacity-100 border border-white/20"
-                  style={{ marginTop: '4px' }}
+              src="/images/purpose-community.png"
+              alt="Infinity Traders community and brand partnerships"
+              className="w-full h-full object-contain rounded-xl opacity-100 border border-white/20"
+              style={{ marginTop: '4px' }}
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 glass p-6 rounded-2xl red-glow animate-float">
@@ -631,60 +631,41 @@ export default function App() {
       </section>
 
       {/* Premium Section */}
-      <section id="premium" className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-red-600/5" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="glass p-12 md:p-20 rounded-[40px] border-red-500/20 red-glow">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <div className="inline-block bg-red-500 text-white text-xs font-black px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
-                  Mentorship
-                </div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-8">Premium Membership Program</h2>
-                <p className="text-xl text-white/60 mb-10 leading-relaxed">
-                  For traders who want deeper mentorship, advanced strategy breakdown, and live market guidance. Take your trading from hobby to professional career.
-                </p>
-                
-                <ul className="space-y-4 mb-12">
-                  {[
-                    "Premium Private Group Access",
-                    "Advanced Strategy Course",
-                    "Market Breakdown Sessions",
-                    "Risk Management Masterclass"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-4 text-lg">
-                      <div className="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0">
-                        <ShieldCheck className="w-4 h-4 text-white" />
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                
-                <button className="bg-red-500 hover:bg-red-600 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all shadow-2xl shadow-red-500/40 active:scale-95">
-                  Buy Premium Course
-                </button>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="aspect-square rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart1/400/400" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
-                  </div>
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart2/400/500" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
-                  </div>
-                </div>
-                <div className="space-y-4 pt-8">
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart3/400/500" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
-                  </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden">
-                    <img src="https://picsum.photos/seed/chart4/400/400" alt="Chart" className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
-                  </div>
-                </div>
-              </div>
+      <section id="premium" className="premium-coming-soon relative overflow-hidden">
+        <div className="premium-atmosphere" aria-hidden="true" />
+        <div className="premium-shell relative z-10 mx-auto max-w-7xl px-6 md:px-10">
+          <div className="premium-layout">
+            <div className="premium-copy">
+              <div className="premium-kicker"><span /> PREMIUM MEMBERSHIP PROGRAM</div>
+              <h2>THE NEXT LEVEL<br /><em>IS LOADING.</em></h2>
+              <p>We&apos;re building a premium trading ecosystem for traders who want sharper systems, deeper execution, and a serious edge.</p>
+              <div className="premium-status"><i /> ACCESS RESTRICTED <span>·</span> COMING SOON</div>
             </div>
+            <div className="premium-core">
+              <div className="premium-core-corners" aria-hidden="true" />
+              <div className="premium-core-label">PREMIUM ENVIRONMENT</div>
+              <div className="premium-logo-pulse"><img src="/images/logo.png" alt="Infinity Trader" /></div>
+              <div className="premium-core-wordmark">INFINITY<br />TRADER</div>
+              <div className="premium-core-meta"><span>SYS: PREPARING</span><span>V.01</span></div>
+            </div>
+            <div className="premium-features">
+              {[
+                ["01", "THE TRADING DESK", "Execution frameworks, market context and repeatable systems."],
+                ["02", "PRIVATE SIGNALS", "High-conviction ideas built around process, not noise."],
+                ["03", "LIVE BREAKDOWNS", "Real-time thinking for traders ready to sharpen their edge."],
+                ["04", "THE INNER CIRCLE", "A focused room for serious growth and accountability."]
+              ].map(([number, title, description]) => (
+                <div className="premium-feature" key={number}>
+                  <div className="premium-feature-top"><span>{number}</span><i>LOCKED</i></div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+              ))}
+            </div>
+            <button type="button" className="premium-cta" aria-label="Stay tuned for the Premium Membership Program">STAY TUNED <span>→</span></button>
+          </div>
+          <div className="premium-marquee" aria-label="Future premium modules">
+            <div className="premium-marquee-track"><span>PRIVATE SIGNALS</span><b>◆</b><span>LIVE BREAKDOWNS</span><b>◆</b><span>ADVANCED SYSTEMS</span><b>◆</b><span>THE INNER CIRCLE</span><b>◆</b><span>PRIVATE SIGNALS</span><b>◆</b><span>LIVE BREAKDOWNS</span><b>◆</b></div>
           </div>
         </div>
       </section>
@@ -738,6 +719,31 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      <div id="live-account" className="broker-access-section relative overflow-hidden px-6 py-24 md:px-10 md:py-36">
+        <div className="broker-access-atmosphere" />
+        <div className="broker-access-grid" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={revealViewport}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-2xl text-center"
+          >
+            <div className="broker-eyebrow"><span className="h-1.5 w-1.5 rounded-full bg-[#FF3B30]" />Live Account Access</div>
+            <h2 className="mt-5 text-balance text-4xl font-bold tracking-[-0.04em] text-[#F5F5F5] md:text-6xl">Open Your Live Account.</h2>
+            <p className="mt-6 text-pretty text-base leading-relaxed text-[#A1A1AA] md:text-lg">Choose the trading setup that fits your strategy, platform and trading conditions.</p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.08em] text-[#71717A] md:text-[11px]">
+              <span className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-[#FF3B30]" />Broker Access</span><span>MT4 · MT5</span><span>Global Markets</span>
+            </div>
+          </motion.div>
+          <div className="mt-14 grid gap-5 md:grid-cols-2">
+            {brokerAccess.map((broker, index) => <BrokerActionBlock key={broker.id} broker={broker} index={index} />)}
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-[9px] leading-relaxed text-[#52525B] md:text-[10px]">Trading conditions, spreads, commissions and availability may vary by region, account type and market conditions.</p>
+        </div>
+      </div>
 
       {/* Contact Section */}
       <section id="contact" className="relative py-28 md:py-36 overflow-hidden">
