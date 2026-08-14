@@ -6,7 +6,8 @@ import {
   ShieldCheck, 
   ChevronRight, 
   ArrowRight, 
-  ExternalLink,
+  ArrowUpRight,
+  Check,
   MessageCircle,
   Video,
   Mail,
@@ -339,28 +340,104 @@ const BrokerCard = ({ name, year, awards, description, logo: Logo }: { name: str
   </div>
 );
 
-const BrokerActionBlock = ({ name, liveUrl, guideUrl }: { name: string; liveUrl: string; guideUrl: string }) => (
-  <div className="glass p-8 rounded-3xl text-center">
-    <h3 className="text-2xl font-bold mb-6">{name}</h3>
-    <div className="flex flex-col gap-4">
-      <a 
-        href={liveUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="bg-red-500 hover:bg-red-600 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-red-500/20 active:scale-95 flex items-center justify-center gap-2"
-      >
-        Open Live Account <ExternalLink className="w-4 h-4" />
-      </a>
-      <a 
-        href={guideUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="bg-white/5 hover:bg-white/10 text-white py-4 rounded-xl font-bold transition-all border border-white/10 flex items-center justify-center gap-2"
-      >
-        Account Opening Guideline <BookOpen className="w-4 h-4" />
-      </a>
+type AccountOption = {
+  name: string;
+  spread: string;
+  commission: string;
+  minDeposit?: string;
+};
+
+type BrokerAccess = {
+  id: string;
+  name: string;
+  logo: string;
+  logoAlt: string;
+  tagline: string;
+  platforms: string[];
+  accounts: AccountOption[];
+  ctaUrl: string;
+};
+
+const brokerAccess: BrokerAccess[] = [
+  {
+    id: 'vt-markets',
+    name: 'VT Markets',
+    logo: '/brokers/vt-markets.webp',
+    logoAlt: 'VT Markets logo',
+    tagline: 'Global Market Access',
+    platforms: ['MT4', 'MT5', 'TradingView', 'WebTrader'],
+    accounts: [
+      { name: 'Standard STP', spread: 'From 1.2 pips', commission: '$0' },
+      { name: 'Raw ECN', spread: 'From 0.0 pips', commission: '$6 round turn' },
+    ],
+    ctaUrl: 'https://www.vtmarkets.com/trade-now/?affid=22393651',
+  },
+  {
+    id: 'ultima-markets',
+    name: 'Ultima Markets',
+    logo: '/brokers/ultima-markets.jpg',
+    logoAlt: 'Ultima Markets logo',
+    tagline: 'Multi-Asset Market Access',
+    platforms: ['MT4', 'MT5', 'WebTrader'],
+    accounts: [
+      { name: 'Standard', spread: 'From 1.0 pips', commission: '$0', minDeposit: '$20' },
+      { name: 'ECN', spread: 'From 0.0 pips', commission: '$5' },
+    ],
+    ctaUrl: 'https://ultgo.com/la-com/BavQ65KR',
+  },
+];
+
+const AccountOption = ({ account }: { account: AccountOption; key?: React.Key }) => (
+  <div className="broker-account-option">
+    <div className="mb-4 flex items-center justify-between gap-3">
+      <h4 className="text-sm font-semibold text-[#F5F5F5]">{account.name}</h4>
+      <Check className="h-4 w-4 text-[#FF4D3D]" />
+    </div>
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div><div className="broker-spec-label">Spread</div><div className="broker-spec-value">{account.spread}</div></div>
+      <div><div className="broker-spec-label">Commission</div><div className="broker-spec-value">{account.commission}</div></div>
+      {account.minDeposit && <div><div className="broker-spec-label">Min deposit</div><div className="broker-spec-value">{account.minDeposit}</div></div>}
     </div>
   </div>
+);
+
+const BrokerActionBlock = ({ broker, index }: { broker: BrokerAccess; index: number; key?: React.Key }) => (
+  <motion.article
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={revealViewport}
+    transition={{ delay: index * 0.1, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+    className="broker-access-card group"
+  >
+    <div className="broker-card-glow" />
+    <div className="broker-card-accent" />
+    <div className="relative z-10 flex h-full flex-col">
+      <div className="flex items-start justify-between gap-6">
+        <div className="broker-logo-wrap">
+          <img src={broker.logo} alt={broker.logoAlt} className="broker-logo" />
+        </div>
+        <ArrowUpRight className="h-5 w-5 text-[#71717A] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#FF4D3D]" />
+      </div>
+      <div className="mt-5">
+        <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-[#71717A]">{broker.tagline}</h3>
+      </div>
+      <div className="mt-8">
+        <div className="broker-section-label">Account options</div>
+        <div className="mt-3 flex flex-col gap-3">
+          {broker.accounts.map((account) => <AccountOption key={account.name} account={account} />)}
+        </div>
+      </div>
+      <div className="mt-7">
+        <div className="broker-section-label">Platforms</div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {broker.platforms.map((platform) => <span key={platform} className="broker-platform-chip">{platform}</span>)}
+        </div>
+      </div>
+      <a href={broker.ctaUrl} target="_blank" rel="noopener noreferrer" className="broker-cta mt-8">
+        Open Live Account <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+      </a>
+    </div>
+  </motion.article>
 );
 
 // --- Main App ---
@@ -454,7 +531,7 @@ export default function App() {
             <div className="hero-marquee-track flex w-max items-center">
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex shrink-0 items-center gap-6 pr-6 md:gap-10 md:pr-10">
-                  {['VT Markets', 'Ultima Markets', 'Burmese Funded Trader', 'Doo Prime', 'Select2Notion'].map((name) => (
+                  {['VT Markets', 'Ultima Markets', 'Burmese Funded Trader', 'Select2Notion'].map((name) => (
                     <span key={`${copy}-${name}`} className="flex items-center gap-6 whitespace-nowrap font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-white/70 transition-colors hover:text-white md:gap-10 md:text-[15px]">
                       {name}<span className="h-1 w-1 rounded-full bg-[#FF3B30]" />
                     </span>
@@ -612,47 +689,52 @@ export default function App() {
         </div>
       </section>
 
-      {/* Brokers Section */}
-      <section id="brokers" className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeading 
-            title="Our Broker Collaborations" 
-            subtitle="We partner with world-class brokers to ensure our community gets the best trading conditions, lowest spreads, and fastest execution."
-          />
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-20">
-            <BrokerCard 
-              name="VT Markets"
-              year="2015"
-              awards={["Best ECN Broker 2023", "Fastest Growing Broker", "Top Tier Liquidity"]}
-              description="A global multi-asset broker providing traders with access to 1000+ financial instruments. Known for its robust technology and competitive spreads."
-              logo={Globe}
-            />
-            <BrokerCard 
-              name="Ultima Markets"
-              year="2016"
-              awards={["Most Transparent Broker", "Best Customer Support", "Innovation in Trading"]}
-              description="An international brokerage firm dedicated to providing a premium trading environment with cutting-edge tools and deep market liquidity."
-              logo={Globe}
-            />
+      {/* Partners & Collaborations / Trading Ecosystem */}
+      <section id="brokers" className="ecosystem-section relative min-h-[100svh] overflow-hidden py-16 md:py-20">
+        <div className="ecosystem-grid" />
+        <div className="ecosystem-terrain" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
+            <div className="ecosystem-eyebrow"><span>03</span><i />PARTNERS &amp; COLLABORATIONS</div>
+            <h2 className="mt-7 text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.05em] text-[#F5F5F5] md:text-7xl">Built With The<br /><span>Trading Ecosystem.</span></h2>
+            <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-[#A1A1AA] md:text-lg">Working alongside brokers, funded trading programs and tools that help our community trade, learn and grow.</p>
+          </motion.div>
+
+          <div className="ecosystem-map mt-12 md:mt-14">
+            <svg className="ecosystem-routes" viewBox="0 0 1000 380" aria-hidden="true" preserveAspectRatio="none">
+              <path id="route-vt" d="M 230 70 C 330 70, 365 140, 401 146" />
+              <path id="route-ultima" d="M 230 310 C 330 310, 365 240, 401 234" />
+              <path id="route-bft" d="M 770 70 C 670 70, 635 140, 599 146" />
+              <path id="route-select" d="M 770 310 C 670 310, 635 240, 599 234" />
+              {['route-vt', 'route-ultima', 'route-bft', 'route-select'].map((route, index) => <circle key={route} className="route-pulse" r="4"><animateMotion dur="4s" begin={`${index * 0.75}s`} repeatCount="indefinite"><mpath href={`#${route}`} /></animateMotion></circle>)}
+            </svg>
+            <div className="ecosystem-orbit orbit-one" /><div className="ecosystem-orbit orbit-two" /><div className="ecosystem-orbit orbit-three" />
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={revealViewport} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="ecosystem-hub">
+              <div className="ecosystem-hub-ring"><Logo size="large" /></div>
+              <div className="ecosystem-hub-wordmark">INFINITY<br />TRADER</div>
+            </motion.div>
+            {[
+              { name: 'VT Markets', category: 'BROKER PARTNER', logo: '/brokers/vt-markets.webp', alt: 'VT Markets', position: 'node-vt', id: 'vt' },
+              { name: 'Ultima Markets', category: 'BROKER PARTNER', logo: '/brokers/ultima-markets.jpg', alt: 'Ultima Markets', position: 'node-ultima', id: 'ultima' },
+              { name: 'Burmese Funded Trader', category: 'PROP TRADING PARTNER', logo: '/brokers/burmese-funded-trader.webp', alt: 'Burmese Funded Trader', position: 'node-bft', id: 'bft' },
+              { name: 'Select2Notion', category: 'TRADING JOURNAL PLATFORM', logo: '/brokers/select2notion.jpg', alt: 'Select2Notion', position: 'node-select', id: 'select' },
+            ].map((partner, index) => (
+              <motion.div key={partner.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: 0.1 * index, duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className={`ecosystem-node ${partner.position}`}>
+                <div className="ecosystem-node-top"><span><i />COLLABORATION</span></div>
+                <div className="ecosystem-logo-frame"><img src={partner.logo} alt={`${partner.alt} logo`} /></div>
+                <div className="ecosystem-node-label"><span>{partner.category.split(' ')[0]}</span> {partner.category.split(' ').slice(1).join(' ')}</div>
+              </motion.div>
+            ))}
           </div>
 
-          <SectionHeading 
-            title="Open Your Live Trading Account" 
-            subtitle="Start your professional trading journey today with our trusted partners."
-          />
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <BrokerActionBlock 
-              name="Ultima Markets"
-              liveUrl="https://ultgo.com/la-com/BavQ65KR"
-              guideUrl="#"
-            />
-            <BrokerActionBlock 
-              name="VT Markets"
-              liveUrl="https://www.vtmarkets.com/trade-now/?affid=22393651"
-              guideUrl="#"
-            />
+          <div className="ecosystem-statement"><span>DIFFERENT PLATFORMS.</span><strong>ONE TRADING ECOSYSTEM.</strong></div>
+
+          <div className="ecosystem-marquee-header"><span><i />OUR PARTNERS</span><span>TRUSTED COLLABORATIONS</span></div>
+          <div className="ecosystem-marquee"><div className="ecosystem-marquee-track">{[0, 1].map((copy) => <div key={copy} className="ecosystem-marquee-copy">{['VT Markets', 'Ultima Markets', 'Burmese Funded Trader', 'Select2Notion'].map((name) => <span key={`${copy}-${name}`}>{name}<b>•</b></span>)}</div>)}</div></div>
+          <div className="ecosystem-auto-loop">AUTO LOOP <i /></div>
+
+          <div className="ecosystem-benefits">
+            {[{ icon: ShieldCheck, title: 'TRUSTED PARTNERS', text: 'We collaborate only with established trading entities.' }, { icon: Users, title: 'STRONG RELATIONSHIPS', text: 'Long-term relationships built around transparency and value.' }, { icon: Award, title: 'MORE OPPORTUNITIES', text: 'More access, more tools and more opportunities for traders.' }, { icon: TrendingUp, title: 'COMMUNITY FIRST', text: 'Everything we build is designed around our community.' }].map((benefit) => <div key={benefit.title} className="ecosystem-benefit"><benefit.icon /><div><h3>{benefit.title}</h3><p>{benefit.text}</p></div></div>)}
           </div>
         </div>
       </section>
