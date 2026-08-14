@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   TrendingUp, 
   BookOpen, 
@@ -18,6 +18,37 @@ import {
   Send
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+
+// --- Motion utilities ---
+
+const useScrollDirection = () => {
+  const [direction, setDirection] = useState<'up' | 'down'>('down');
+  const lastY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const updateDirection = () => {
+      const currentY = window.scrollY;
+      if (Math.abs(currentY - lastY.current) > 8) {
+        setDirection(currentY < lastY.current ? 'up' : 'down');
+        lastY.current = currentY;
+      }
+      ticking.current = false;
+    };
+    const onScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateDirection);
+        ticking.current = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return direction;
+};
+
+const revealViewport = { once: false, amount: 0.2, margin: '0px 0px -10% 0px' } as const;
 
 // --- Components ---
 
@@ -244,7 +275,7 @@ const SectionHeading = ({ title, subtitle, centered = true }: { title: string; s
     <motion.h2 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={revealViewport}
       className="text-3xl md:text-4xl font-bold mb-4"
     >
       {title}
@@ -253,7 +284,7 @@ const SectionHeading = ({ title, subtitle, centered = true }: { title: string; s
       <motion.p 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={revealViewport}
         transition={{ delay: 0.1 }}
         className="text-white/60 max-w-2xl mx-auto"
       >
@@ -335,8 +366,13 @@ const BrokerActionBlock = ({ name, liveUrl, guideUrl }: { name: string; liveUrl:
 // --- Main App ---
 
 export default function App() {
+  const scrollDirection = useScrollDirection();
+
   return (
-    <div className="min-h-screen font-sans selection:bg-red-500/30">
+    <div
+      data-scroll-direction={scrollDirection}
+      className="min-h-screen font-sans selection:bg-red-500/30 transition-colors duration-300"
+    >
       <Navbar />
 
       {/* Hero Section */}
@@ -694,7 +730,7 @@ export default function App() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ duration: 0.6 }}
               >
                 <span className="inline-block bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm text-white/60 text-[11px] font-semibold uppercase tracking-[0.2em] px-5 py-2.5 rounded-full mb-6">
@@ -742,7 +778,7 @@ export default function App() {
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={revealViewport}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
                     className="group flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-orange-500/20 hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/[0.04]"
                   >
@@ -763,7 +799,7 @@ export default function App() {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={revealViewport}
               transition={{ delay: 0.2, duration: 0.7 }}
               className="flex-1 relative"
             >

@@ -58,3 +58,19 @@
 .animate-glow-pulse {
   animation: glow-pulse 4s ease-in-out infinite;
 }
+
+/* Direction-aware polish keeps the page feeling alive without adding noise. */
+[data-scroll-direction="up"] .glass {
+  box-shadow: 0 14px 42px rgba(234, 88, 12, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
