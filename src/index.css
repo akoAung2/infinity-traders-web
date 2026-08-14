@@ -313,14 +313,14 @@
 .ecosystem-section { min-height: 100svh; background: radial-gradient(circle at 50% 44%, rgba(255,59,48,.06), transparent 48%), radial-gradient(circle at 12% 30%, rgba(255,59,48,.025), transparent 30%), radial-gradient(circle at 88% 76%, rgba(255,59,48,.025), transparent 30%), #050505; }
 .ecosystem-grid { opacity:.045; background-size:48px 48px; }
 .ecosystem-terrain { opacity:.10; bottom:0; height:16%; }
-.ecosystem-map { height:380px; max-width:1240px; margin-top:0; }
+.ecosystem-map { position:relative; height:380px; max-width:1240px; margin:0 auto; }
 .ecosystem-orbit { border-color:rgba(255,59,48,.08); animation:ecosystem-orbit 80s linear infinite; }
 .orbit-one { width:31%; height:70%; }.orbit-two { width:72%; height:52%; }.orbit-three { width:92%; height:30%; animation-direction:reverse; }
 .ecosystem-routes { position:absolute; inset:0; z-index:2; width:100%; height:100%; overflow:visible; pointer-events:none; }
 .ecosystem-routes path { fill:none; stroke:rgba(255,255,255,.14); stroke-width:1; vector-effect:non-scaling-stroke; transition:stroke .3s ease; }
 .ecosystem-routes path:hover { stroke:rgba(255,59,48,.3); }
 .route-pulse { fill:#FF3B30; filter:drop-shadow(0 0 7px rgba(255,59,48,.45)); }
-.ecosystem-hub { position:absolute; left:50%; top:50%; z-index:4; width:220px; height:220px; margin-left:-110px; margin-top:-110px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1.5px solid rgba(255,59,48,.35); border-radius:9999px; background:radial-gradient(circle 55% at center,rgba(255,59,48,.09),rgba(5,5,5,.96) 65%); box-shadow:0 0 70px rgba(255,59,48,.1), inset 0 0 40px rgba(255,59,48,.06), 0 0 0 30px rgba(255,59,48,.015); transition:box-shadow .4s ease; }
+.ecosystem-hub { position:absolute; left:50%; top:50%; z-index:4; width:220px; height:220px; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; justify-content:center; border:1.5px solid rgba(255,59,48,.35); border-radius:9999px; background:radial-gradient(circle 55% at center,rgba(255,59,48,.09),rgba(5,5,5,.96) 65%); box-shadow:0 0 70px rgba(255,59,48,.1), inset 0 0 40px rgba(255,59,48,.06), 0 0 0 30px rgba(255,59,48,.015); transition:box-shadow .4s ease; }
 .ecosystem-hub:hover { box-shadow:0 0 90px rgba(255,59,48,.15), inset 0 0 45px rgba(255,59,48,.08), 0 0 0 30px rgba(255,59,48,.025); }
 .ecosystem-hub:before { content:''; position:absolute; inset:-8px; border:1px solid rgba(255,59,48,.12); border-radius:50%; pointer-events:none; }
 .ecosystem-node { width:238px; min-height:126px; padding:16px 18px; border-radius:18px; background:rgba(10,10,10,.92); border-color:rgba(255,255,255,.08); box-shadow:inset 0 1px rgba(255,255,255,.045),0 20px 50px rgba(0,0,0,.35); }
