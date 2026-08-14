@@ -506,7 +506,8 @@ export default function App() {
                 <img 
                   src="/images/purpose.png" 
                   alt="Infinity Trader platform with a trading dashboard and market chart" 
-                  className="w-full h-full object-cover rounded-2xl opacity-90"
+                  className="w-full h-full object-cover rounded-xl opacity-100 border border-white/20"
+                  style={{ marginTop: '4px' }}
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 glass p-6 rounded-2xl red-glow animate-float">
