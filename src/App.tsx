@@ -16,7 +16,13 @@ import {
   Globe,
   Award,
   Calendar,
-  Send
+  Send,
+  Mic,
+  Bot,
+  Database,
+  BarChart3,
+  Play,
+  Sparkles
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
 
@@ -478,6 +484,53 @@ const BrokerActionBlock = ({ broker, index }: { broker: BrokerAccess; index: num
   </motion.article>
 );
 
+const select2Features = [
+  { icon: Bot, title: 'AI Agent', text: 'Understands your trade and creates a structured journal.' },
+  { icon: Mic, title: 'Voice Journal', text: 'Speak your trade. AI converts it instantly.' },
+  { icon: Send, title: 'Telegram Bot', text: 'Journal directly from Telegram, anywhere.' },
+  { icon: Database, title: 'Notion Integration', text: 'Your data stays secure and organized.' },
+  { icon: BarChart3, title: 'Smart Dashboard', text: 'Track PnL, win rate, and performance.' },
+  { icon: Calendar, title: 'Daily / Weekly Summary', text: 'AI summarizes your performance.' },
+];
+
+const VoiceJournalCard = () => (
+  <div className="s2n-voice-card">
+    <div className="s2n-voice-top"><i><Mic size={17} /></i><span>{Array.from({ length: 22 }, (_, i) => <b key={i} style={{ height: `${10 + ((i * 7) % 20)}px` }} />)}</span></div>
+    <p>ဒီနေ့ Nas ကို Long ဝင်တယ်<br />1000$ profit ရတယ်<br />Liquidity Sweep ပြီး<br />Confirmation ရမှ Entry ဝင်တယ်</p>
+  </div>
+);
+
+const AIAgentCard = () => (
+  <div className="s2n-agent-card"><strong><Bot size={15} /> AI AGENT</strong>{['Trade detected', 'Data extracted', 'Emotion detected: Confident', 'Reflection generated', 'Journal saved to Notion'].map(item => <p key={item}><Check size={13} /> {item}</p>)}</div>
+);
+
+const DashboardPreview = () => (
+  <div className="s2n-dashboard" aria-label="Select2Notion dashboard preview">
+    <div className="s2n-dashboard-top"><span><Sparkles size={13} /> Select<span>2</span>Notion</span><b>Synced to Notion ◈</b></div>
+    <div className="s2n-metrics">{[['Total PnL', '+$3,420.50'], ['Win Rate', '68.4%'], ['Total Trades', '32'], ['Profit Factor', '1.86']].map(([label, value]) => <div key={label}><small>{label}</small><strong className={label === 'Total PnL' || label === 'Win Rate' ? 'positive' : ''}>{value}</strong></div>)}</div>
+    <div className="s2n-chart"><div><span>Equity Curve</span><small>May 5 — Jun 2</small></div><svg viewBox="0 0 480 120" role="img" aria-label="Rising equity curve"><path d="M0 104 C35 97 55 105 82 87 S125 93 154 72 S192 78 220 60 S259 69 290 50 S333 59 360 35 S420 40 480 8" /></svg></div>
+    <div className="s2n-dashboard-bottom"><div><small>PnL by Day</small><div className="s2n-bars"><i /><i /><i /><i /><i /><i /><i /></div></div><div className="s2n-recent"><small>Recent Journals</small><span>NAS100 <b>Long</b> <em>+$1,000.00</em> Confident</span><span>XAUUSD <strong>Short</strong> <mark>-$320.00</mark> Fear</span></div></div>
+  </div>
+);
+
+const TradingRoom = () => (
+  <div className="s2n-room" aria-hidden="true">
+    <div className="s2n-window"><span /><span /><span /></div><div className="s2n-city-lights"><i /><i /><i /><i /><i /><i /></div><div className="s2n-bookshelf"><b /><b /><b /><b /><b /></div><div className="s2n-lamp s2n-lamp-left"><span /></div><div className="s2n-lamp s2n-lamp-right"><span /></div><div className="s2n-desk"><div className="s2n-monitor"><span /><span /><span /></div><div className="s2n-monitor small"><span /><span /></div><div className="s2n-keyboard" /></div><div className="s2n-sofa"><span /><span /><span /></div><div className="s2n-person s2n-desk-person"><div className="s2n-head" /><div className="s2n-hoodie" /><div className="s2n-arm" /></div><div className="s2n-person s2n-sofa-person"><div className="s2n-head" /><div className="s2n-hoodie" /><div className="s2n-phone" /></div>
+  </div>
+);
+
+const Select2NotionChapter = () => (
+  <CinematicSection id="select2notion" className="cinematic-select2notion">
+    <section className="select2notion-section">
+      <div className="s2n-room-wrap"><TradingRoom /><div className="s2n-room-vignette" /></div>
+      <div className="s2n-desktop-grid">
+        <div className="s2n-content"><div className="s2n-brand-lockup"><img src="/brokers/select2notion.jpg" alt="Select2Notion logo" /><div><strong>Select<span>2</span>Notion</strong><small>Trading Journal → Notion</small></div></div><div className="s2n-copy"><p className="s2n-eyebrow">SELECT2NOTION</p><h2>Trade. Journal.<br /><em>Improve.</em></h2><p>Turn every trade into a structured journal.<br />Auto-sync to Notion. Smarter every day.</p><div className="s2n-feature-stack">{select2Features.map(({ icon: Icon, title, text }) => <div className="s2n-feature" key={title}><i><Icon size={17} /></i><div><strong>{title}</strong><span>{text}</span></div></div>)}</div><a className="s2n-primary" href="https://tally.so/r/44pKVo" target="_blank" rel="noopener noreferrer">Start Journaling Now <ArrowRight size={17} /></a><a className="s2n-secondary" href="#select2notion-workflow"><Play size={14} /> See How It Works</a></div></div>
+        <div id="select2notion-workflow" className="s2n-overlays"><VoiceJournalCard /><AIAgentCard /><DashboardPreview /><svg className="s2n-connector" viewBox="0 0 700 500" aria-hidden="true"><path d="M210 110 C300 140 260 275 350 290 S480 330 530 380" /></svg></div>
+      </div>
+    </section>
+  </CinematicSection>
+);
+
 // --- Main App ---
 
 export default function App() {
@@ -660,6 +713,8 @@ export default function App() {
         </div>
       </section>
       </CinematicSection>
+
+      <Select2NotionChapter />
 
       {/* Premium Section */}
       <CinematicSection id="premium" className="cinematic-premium">
