@@ -485,18 +485,18 @@ const BrokerActionBlock = ({ broker, index }: { broker: BrokerAccess; index: num
 );
 
 const select2Features = [
-  { icon: Bot, title: 'AI Agent', text: 'Understands your trade and creates a structured journal.' },
-  { icon: Mic, title: 'Voice Journal', text: 'Just speak your trade. AI converts it instantly.' },
-  { icon: Send, title: 'Telegram Bot', text: 'Journal directly from Telegram, anywhere.' },
-  { icon: Database, title: 'Notion Sync', text: 'All data stays organized in your own workspace.' },
-  { icon: BarChart3, title: 'Smart Dashboard', text: 'Track PnL, win rate, and performance.' },
-  { icon: Calendar, title: 'Daily / Weekly Summary', text: 'AI summarizes your performance for you.' },
+  { icon: Bot, title: 'AI Agent', text: 'Understands your trade, extracts the setup, and creates a structured journal.' },
+  { icon: Mic, title: 'Voice Journal', text: 'Just speak your trade. AI converts it into a reflection instantly.' },
+  { icon: Send, title: 'Telegram Bot', text: 'Journal directly from Telegram, wherever you are.' },
+  { icon: Database, title: 'Notion Sync', text: 'Every entry stays organized in your own workspace.' },
+  { icon: BarChart3, title: 'Smart Dashboard', text: 'Track PnL, win rate, and performance over time.' },
+  { icon: Calendar, title: 'Daily / Weekly Summary', text: 'A concise performance review delivered to you.' },
 ];
 
 const TradingRoom = () => (
-  <div className="s2n-room" aria-label="Cinematic trading room">
+  <div className="s2n-room" aria-label="Cinematic trading room with desk and sofa">
     <div className="s2n-window"><span /><span /><span /></div>
-    <div className="s2n-city-lights"><i /><i /><i /><i /><i /><i /></div>
+    <div className="s2n-city-lights"><i /><i /><i /><i /><i /><i /><i /><i /></div>
     <div className="s2n-bookshelf"><b /><b /><b /><b /><b /></div>
     <div className="s2n-lamp s2n-lamp-left"><span /></div>
     <div className="s2n-lamp s2n-lamp-right"><span /></div>
