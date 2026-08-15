@@ -16,7 +16,13 @@ import {
   Globe,
   Award,
   Calendar,
-  Send
+  Send,
+  Mic,
+  Bot,
+  BarChart3,
+  Play,
+  Database,
+  Sparkles
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
 
@@ -478,6 +484,53 @@ const BrokerActionBlock = ({ broker, index }: { broker: BrokerAccess; index: num
   </motion.article>
 );
 
+const select2NotionHero = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image%20Gen%202026-08-15%20from%20ChatGPT%20%282%29-GoRWME2Onpeu8ioQESRXYIfLjSjobz.png';
+
+const select2Features = [
+  { icon: Bot, title: 'AI Agent', text: 'AI understands your trade and creates a structured journal.' },
+  { icon: Mic, title: 'Voice Journal', text: 'Just speak your trade. AI converts it instantly.' },
+  { icon: Send, title: 'Telegram Bot', text: 'Journal directly from Telegram, anywhere.' },
+  { icon: Database, title: 'Notion Sync', text: 'Your data stays securely in your Notion workspace.' },
+  { icon: BarChart3, title: 'Smart Dashboard', text: 'Track PnL, win rate and performance.' },
+  { icon: Calendar, title: 'Daily / Weekly Summary', text: 'AI summarizes your performance and sends it to you.' },
+];
+
+const DashboardPreview = () => (
+  <div className="s2n-dashboard" aria-label="Select2Notion dashboard preview">
+    <div className="s2n-dashboard-top"><span><Sparkles size={14} /> Select<span>2</span>Notion</span><b>● Connected</b></div>
+    <div className="s2n-metrics">
+      {[['Total PnL', '+$3,420.50', 'positive'], ['Win Rate', '68.4%', 'positive'], ['Total Trades', '32', ''], ['Profit Factor', '1.86', '']].map(([label, value, tone]) => <div key={label}><small>{label}</small><strong className={tone}>{value}</strong></div>)}
+    </div>
+    <div className="s2n-chart"><div className="s2n-chart-heading"><span>Equity Curve</span><small>May 5 — Jun 2</small></div><svg viewBox="0 0 480 120" role="img" aria-label="Equity curve rising over time"><defs><linearGradient id="s2n-line" x1="0" x2="1"><stop stopColor="#7c3cff" /><stop offset="1" stopColor="#b66cff" /></linearGradient></defs><path d="M0 105 C40 92 55 104 85 88 S125 90 150 72 S190 82 218 57 S260 66 290 52 S330 59 360 32 S420 35 480 8" fill="none" stroke="url(#s2n-line)" strokeWidth="3" /></svg></div>
+    <div className="s2n-journal-row"><span>NAS100</span><b>Long</b><strong>+$1,000.00</strong><span>Confident</span><ArrowRight size={15} /></div>
+  </div>
+);
+
+const Select2NotionStory = () => (
+  <section id="select2notion" className="select2notion-story" style={{ backgroundImage: `url(${select2NotionHero})` }}>
+    <div className="s2n-vignette" aria-hidden="true" />
+    <div className="s2n-story-content">
+      <div className="s2n-brand"><img src="/brokers/select2notion.jpg" alt="Select2Notion" /><span>Trading Journal <i>→</i> Notion</span></div>
+      <div className="s2n-hero-copy">
+        <p className="s2n-kicker">TRADING JOURNAL · NOTION SYNC</p>
+        <h2><em>TRADE FIRST.</em><br />REFLECT AFTER.</h2>
+        <p className="s2n-lede">Every trade has a lesson.<br />Journaling helps you see it.</p>
+        <a className="s2n-primary-cta" href="https://tally.so/r/44pKVo" target="_blank" rel="noopener noreferrer">Start Journaling Now <ArrowRight size={17} /></a>
+        <a className="s2n-secondary-cta" href="#s2n-journal"><Play size={15} /> See How It Works</a>
+      </div>
+    </div>
+
+    <div id="s2n-journal" className="s2n-journal-content">
+      <div className="s2n-section-copy"><p className="s2n-kicker purple">VOICE → AI → NOTION</p><h3>JOURNAL<br /><span>WITHOUT</span><br />THE FRICTION.</h3><div className="s2n-feature-list">{select2Features.map(({ icon: Icon, title, text }) => <div className="s2n-feature" key={title}><span className="s2n-feature-icon"><Icon size={18} /></span><div><strong>{title}</strong><p>{text}</p></div></div>)}</div></div>
+      <div className="s2n-product-stack">
+        <div className="s2n-voice-card"><div className="s2n-voice-top"><span><Mic size={16} /></span><div className="s2n-waveform">{Array.from({ length: 22 }, (_, i) => <i key={i} style={{ height: `${12 + (i % 5) * 5}px` }} />)}</div></div><p>ဒီနေ့ Nas ကို Long တယ်။<br />1000$ profit ထွက်တယ်။<br />Liquidity Sweep ပြီး Entry ဝင်တယ်။</p></div>
+        <div className="s2n-agent-card"><div><Bot size={16} /> AI AGENT</div>{['Trade detected', 'Data extracted', 'Emotion detected', 'Journal saved to Notion'].map((item) => <p key={item}><Check size={14} /> {item}</p>)}</div>
+        <DashboardPreview />
+      </div>
+    </div>
+  </section>
+);
+
 // --- Main App ---
 
 export default function App() {
@@ -582,6 +635,8 @@ export default function App() {
         </div>
       </section>
       </CinematicSection>
+
+      <Select2NotionStory />
 
       {/* Purpose Section */}
       <CinematicSection id="purpose" className="cinematic-purpose">
