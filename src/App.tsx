@@ -555,10 +555,7 @@ const Select2NotionChapter = () => (
   <CinematicSection id="select2notion" className="cinematic-select2notion">
     <section className="select2notion-section">
       <div className="s2n-room-wrap"><TradingRoom /><div className="s2n-room-vignette" /></div>
-      <div className="s2n-desktop-grid">
-        <div className="s2n-content"><div className="s2n-brand-lockup"><img src="/brokers/select2notion.jpg" alt="Select2Notion logo" /><div><strong>Select<span>2</span>Notion</strong><small>Trading Journal → Notion</small></div></div><div className="s2n-copy"><p className="s2n-eyebrow">SELECT2NOTION</p><h2>Trade. Journal.<br /><em>Improve.</em></h2><p>Turn every trade into a structured journal.<br />Auto-sync to Notion. Smarter every day.</p><div className="s2n-feature-stack">{select2Features.map(({ icon: Icon, title, text }) => <div className="s2n-feature" key={title}><i><Icon size={17} /></i><div><strong>{title}</strong><span>{text}</span></div></div>)}</div><a className="s2n-primary" href="https://tally.so/r/44pKVo" target="_blank" rel="noopener noreferrer">Start Journaling Now <ArrowRight size={17} /></a></div></div>
-        <div id="select2notion-workflow" className="s2n-overlays"><DashboardLoopPreview /></div>
-      </div>
+
     </section>
   </CinematicSection>
 );
