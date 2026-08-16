@@ -505,14 +505,45 @@ const AIAgentCard = () => (
   <div className="s2n-agent-card"><strong><Bot size={15} /> AI AGENT</strong>{['Trade detected', 'Data extracted', 'Emotion detected: Confident', 'Reflection generated', 'Journal saved to Notion'].map(item => <p key={item}><Check size={13} /> {item}</p>)}</div>
 );
 
-const DashboardPreview = () => (
-  <div className="s2n-dashboard" aria-label="Select2Notion dashboard preview">
-    <div className="s2n-dashboard-top"><span><Sparkles size={13} /> Select<span>2</span>Notion</span><b>Synced to Notion ◈</b></div>
-    <div className="s2n-metrics">{[['Total PnL', '+$3,420.50'], ['Win Rate', '68.4%'], ['Total Trades', '32'], ['Profit Factor', '1.86']].map(([label, value]) => <div key={label}><small>{label}</small><strong className={label === 'Total PnL' || label === 'Win Rate' ? 'positive' : ''}>{value}</strong></div>)}</div>
-    <div className="s2n-chart"><div><span>Equity Curve</span><small>May 5 — Jun 2</small></div><svg viewBox="0 0 480 120" role="img" aria-label="Rising equity curve"><path d="M0 104 C35 97 55 105 82 87 S125 93 154 72 S192 78 220 60 S259 69 290 50 S333 59 360 35 S420 40 480 8" /></svg></div>
-    <div className="s2n-dashboard-bottom"><div><small>PnL by Day</small><div className="s2n-bars"><i /><i /><i /><i /><i /><i /><i /></div></div><div className="s2n-recent"><small>Recent Journals</small><span>NAS100 <b>Long</b> <em>+$1,000.00</em> Confident</span><span>XAUUSD <strong>Short</strong> <mark>-$320.00</mark> Fear</span></div></div>
-  </div>
-);
+const dashboardScreenshots = [
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.23.48%E2%80%AFPM-MEU7MA80XdMfDKU4Ygc7G637ZFoNB1.png', alt: 'Select2Notion overview dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.01%E2%80%AFPM-QChYQShLQzDsWKwjhjfMpcj6lXmwzI.png', alt: 'Select2Notion portfolio edge dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.23%E2%80%AFPM-NEE1PNCcHnujmbXUZVbnAvnvIrQiFd.png', alt: 'Select2Notion recent trades dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.41%E2%80%AFPM-gKLFVGh2abp35T6frqGlCyC2LqNaf2.png', alt: 'Select2Notion performance analytics dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.25.40%E2%80%AFPM-gq2N41sBTjCzNny4f1OBsvTSaRr6lK.png', alt: 'Select2Notion AI trading agent dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.57%E2%80%AFPM-oog5K3cfRxU6aBEj7LlgGmTjcVt5i4.png', alt: 'Select2Notion P&L calendar dashboard' },
+];
+
+const DashboardLoopPreview = () => {
+  const [activeScreenshot, setActiveScreenshot] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setActiveScreenshot((current) => (current + 1) % dashboardScreenshots.length), 3600);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="s2n-live-dashboard" aria-label="Live Select2Notion dashboard preview">
+      <div className="s2n-dashboard-chrome"><span><Sparkles size={13} /> LIVE PRODUCT PREVIEW</span><b><i /> LIVE SYNC</b></div>
+      <div className="s2n-dashboard-viewport">
+        <AnimatePresence initial={false} mode="sync">
+          <motion.img
+            key={dashboardScreenshots[activeScreenshot].src}
+            src={dashboardScreenshots[activeScreenshot].src}
+            alt={dashboardScreenshots[activeScreenshot].alt}
+            className="s2n-dashboard-screenshot"
+            initial={{ opacity: 0, scale: 1.035, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 0.985, filter: 'blur(5px)' }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </AnimatePresence>
+        <div className="s2n-dashboard-sheen" aria-hidden="true" />
+      </div>
+      <div className="s2n-dashboard-footer"><span>{String(activeScreenshot + 1).padStart(2, '0')} / {String(dashboardScreenshots.length).padStart(2, '0')}</span><div>{dashboardScreenshots.map((shot, index) => <button key={shot.src} type="button" aria-label={`Show dashboard view ${index + 1}`} aria-pressed={index === activeScreenshot} onClick={() => setActiveScreenshot(index)} />)}</div><span>SELECT2NOTION</span></div>
+    </div>
+  );
+};
 
 const TradingRoom = () => (
   <div className="s2n-room" aria-hidden="true">
@@ -526,7 +557,7 @@ const Select2NotionChapter = () => (
       <div className="s2n-room-wrap"><TradingRoom /><div className="s2n-room-vignette" /></div>
       <div className="s2n-desktop-grid">
         <div className="s2n-content"><div className="s2n-brand-lockup"><img src="/brokers/select2notion.jpg" alt="Select2Notion logo" /><div><strong>Select<span>2</span>Notion</strong><small>Trading Journal → Notion</small></div></div><div className="s2n-copy"><p className="s2n-eyebrow">SELECT2NOTION</p><h2>Trade. Journal.<br /><em>Improve.</em></h2><p>Turn every trade into a structured journal.<br />Auto-sync to Notion. Smarter every day.</p><div className="s2n-feature-stack">{select2Features.map(({ icon: Icon, title, text }) => <div className="s2n-feature" key={title}><i><Icon size={17} /></i><div><strong>{title}</strong><span>{text}</span></div></div>)}</div><a className="s2n-primary" href="https://tally.so/r/44pKVo" target="_blank" rel="noopener noreferrer">Start Journaling Now <ArrowRight size={17} /></a></div></div>
-        <div id="select2notion-workflow" className="s2n-overlays"><VoiceJournalCard /><AIAgentCard /><DashboardPreview /><svg className="s2n-connector" viewBox="0 0 700 500" aria-hidden="true"><path d="M210 110 C300 140 260 275 350 290 S480 330 530 380" /></svg></div>
+        <div id="select2notion-workflow" className="s2n-overlays"><DashboardLoopPreview /></div>
       </div>
     </section>
   </CinematicSection>
