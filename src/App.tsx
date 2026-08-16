@@ -478,6 +478,59 @@ const BrokerActionBlock = ({ broker, index }: { broker: BrokerAccess; index: num
   </motion.article>
 );
 
+const SELECT2NOTION_SCREENSHOTS = [
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.23.48%E2%80%AFPM-QZrV4AvlLfhRjLxyQh4PVZwkgO66Xm.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.01%E2%80%AFPM-dtv9luhNnvpuLzmyy8uz61sbgO2pQY.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.23%E2%80%AFPM-vMDMKGGnbc06d2RJKbohVp2u0jInsp.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.35%E2%80%AFPM-DTKPRBkI0ymGbiyFkKT43ivNJOFYhF.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.41%E2%80%AFPM-VSl0XKKWTWwbTevExThQGWNLCmxrbW.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.49%E2%80%AFPM-Z4H98grQsw09MpHHuA0ZFPdjk9cz7c.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.57%E2%80%AFPM-ZlEYg1kKCAF6iwhQxIGlvg1aABFD2u.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.25.40%E2%80%AFPM-BqkAKFUjiIYrJUVk5MP9hGfvVN5upd.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.26.00%E2%80%AFPM-LiWWLaHPYr0TZa2cdniZwivNJNRGdd.png',
+];
+
+const Select2NotionPreview = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % SELECT2NOTION_SCREENSHOTS.length);
+    }, 4200);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return (
+    <CinematicSection id="select2notion" className="cinematic-select2notion">
+      <section className="select2notion-section relative overflow-hidden px-6 py-24 md:px-10 md:py-36">
+        <div className="select2notion-atmosphere" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="select2notion-heading">
+            <div className="select2notion-eyebrow"><span />SELECT2NOTION · LIVE DASHBOARD LOOP</div>
+            <h2>Journal the edge.<br /><em>See the pattern.</em></h2>
+            <p>A focused trading journal for turning setups, psychology and performance into a repeatable process.</p>
+          </div>
+          <div className="select2notion-preview-shell">
+            <div className="select2notion-preview-topbar"><span><i /> LIVE PREVIEW</span><b>SELECT2NOTION</b><small>{String(activeIndex + 1).padStart(2, '0')} / {String(SELECT2NOTION_SCREENSHOTS.length).padStart(2, '0')}</small></div>
+            <div className="select2notion-screen" aria-live="polite">
+              <AnimatePresence mode="wait">
+                <motion.img key={SELECT2NOTION_SCREENSHOTS[activeIndex]} src={SELECT2NOTION_SCREENSHOTS[activeIndex]} alt="Select2Notion trading dashboard preview" initial={{ opacity: 0, scale: 1.015 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.99 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} />
+              </AnimatePresence>
+            </div>
+            <div className="select2notion-dots" aria-label="Dashboard preview frames">
+              {SELECT2NOTION_SCREENSHOTS.map((_, index) => <button key={index} type="button" aria-label={`Show dashboard frame ${index + 1}`} aria-current={index === activeIndex} onClick={() => setActiveIndex(index)} />)}
+            </div>
+          </div>
+          <div className="select2notion-offer">
+            <div><span className="select2notion-offer-label">LIFETIME ACCESS</span><strong><span className="select2notion-price">50,000</span> MMK</strong><p>One payment. Your complete trading journal, forever.</p></div>
+            <a href="https://tally.so/r/wg4g6P" target="_blank" rel="noopener noreferrer" className="select2notion-cta">GET SELECT2NOTION <ArrowUpRight className="h-4 w-4" /></a>
+          </div>
+        </div>
+      </section>
+    </CinematicSection>
+  );
+};
+
 // --- Main App ---
 
 export default function App() {
@@ -702,6 +755,8 @@ export default function App() {
         </div>
       </section>
       </CinematicSection>
+
+      <Select2NotionPreview />
 
       {/* Partners & Collaborations / Trading Ecosystem */}
       <CinematicSection id="brokers" className="cinematic-brokers">
