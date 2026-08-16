@@ -25,6 +25,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
+import { BubbleBackground } from './components/bubble-background';
 
 // --- Motion utilities ---
 
@@ -694,7 +695,19 @@ export default function App() {
       {/* Systems Section */}
       <CinematicSection id="systems" className="cinematic-systems">
       <section className="trading-systems-section relative overflow-hidden">
-        <div className="systems-technical-bg" aria-hidden="true"><div className="systems-radar" /><div className="systems-chart-line" /></div>
+        <BubbleBackground
+          interactive
+          className="learning-bubble-background"
+          colors={{
+            first: '255,30,30',
+            second: '255,80,20',
+            third: '180,0,0',
+            fourth: '255,45,80',
+            fifth: '120,20,20',
+            sixth: '255,120,40',
+          }}
+        />
+        <div className="learning-red-glow" aria-hidden="true" />
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-28">
           <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="systems-header">
             <div className="systems-label"><span /> FREE TRADING EDUCATION</div>

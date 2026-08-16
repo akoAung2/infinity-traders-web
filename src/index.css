@@ -363,7 +363,7 @@
   }
 }
 
-.trading-systems-section { background:#050505; color:#f5f5f5; }
+.trading-systems-section { position:relative; background:#050505; color:#f5f5f5; }.learning-bubble-background { position:absolute; inset:0; z-index:0; width:100%; height:100%; opacity:.72; pointer-events:auto; }.learning-red-glow { position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(ellipse at 50% 20%,rgba(255,31,31,.11),transparent 42%),radial-gradient(circle at 18% 50%,rgba(255,90,31,.06),transparent 30%); }.trading-systems-section > .relative { position:relative; z-index:1; }
 .systems-technical-bg { position:absolute; inset:0; pointer-events:none; overflow:hidden; background:radial-gradient(circle at 50% 38%,rgba(255,43,43,.09),transparent 35%),linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px); background-size:auto,52px 52px,52px 52px; }
 .systems-radar { position:absolute; left:50%; top:42%; width:min(62vw,720px); aspect-ratio:1; transform:translate(-50%,-50%); border:1px solid rgba(255,43,43,.1); border-radius:50%; box-shadow:0 0 0 80px rgba(255,43,43,.018),0 0 0 160px rgba(255,43,43,.012); }
 .systems-radar::before,.systems-radar::after { content:""; position:absolute; inset:18%; border:1px solid rgba(255,43,43,.07); border-radius:50%; }.systems-radar::after { inset:0; border-color:rgba(255,43,43,.06); transform:rotate(45deg) scaleX(.05); }
