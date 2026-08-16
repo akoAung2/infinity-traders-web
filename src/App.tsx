@@ -506,13 +506,30 @@ const AIAgentCard = () => (
 );
 
 const dashboardScreenshots = [
-  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.23.48%E2%80%AFPM-MEU7MA80XdMfDKU4Ygc7G637ZFoNB1.png', alt: 'Select2Notion overview dashboard' },
-  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.01%E2%80%AFPM-QChYQShLQzDsWKwjhjfMpcj6lXmwzI.png', alt: 'Select2Notion portfolio edge dashboard' },
-  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.23%E2%80%AFPM-NEE1PNCcHnujmbXUZVbnAvnvIrQiFd.png', alt: 'Select2Notion recent trades dashboard' },
-  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.41%E2%80%AFPM-gKLFVGh2abp35T6frqGlCyC2LqNaf2.png', alt: 'Select2Notion performance analytics dashboard' },
-  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.25.40%E2%80%AFPM-gq2N41sBTjCzNny4f1OBsvTSaRr6lK.png', alt: 'Select2Notion AI trading agent dashboard' },
-  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.57%E2%80%AFPM-oog5K3cfRxU6aBEj7LlgGmTjcVt5i4.png', alt: 'Select2Notion P&L calendar dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.23.48%E2%80%AFPM-RMdGrfiCU4VLq8GOImVr84N5D1Ne8H.png', alt: 'Select2Notion overview dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.01%E2%80%AFPM-OimOJIc047nIL14HZ4PyqLUArenA47.png', alt: 'Select2Notion portfolio edge dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.23%E2%80%AFPM-Q9qc72MHx7LMoeT28cGi1TCoWq5xTy.png', alt: 'Select2Notion recent trades dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.41%E2%80%AFPM-hWRSR1O3t1HuPQL6AJj8K16FCoZjMz.png', alt: 'Select2Notion performance analytics dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.49%E2%80%AFPM-buTAi0rekLyMJeGcyRwGtupulH50Br.png', alt: 'Select2Notion trading hub dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.57%E2%80%AFPM-X4wBsfpfw3BfYc7vcB5GT7zkT3eaUU.png', alt: 'Select2Notion P&L calendar dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.25.40%E2%80%AFPM-rewOPdtVZwOwYnZ9JH2JpZhtpg3C3V.png', alt: 'Select2Notion AI trading agent dashboard' },
+  { src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.26.00%E2%80%AFPM-WMnJFMlfqbxl12yiX5UhcIDeuToqNJ.png', alt: 'Select2Notion news intelligence dashboard' },
 ];
+
+const PricingCounter = () => {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    const started = window.setTimeout(() => {
+      const timer = window.setInterval(() => setValue((current) => {
+        if (current >= 50000) { window.clearInterval(timer); return 50000; }
+        return Math.min(50000, current + 2500);
+      }), 70);
+      return () => window.clearInterval(timer);
+    }, 450);
+    return () => window.clearTimeout(started);
+  }, []);
+  return <div className="s2n-pricing"><small>ONE TIME PAYMENT</small><strong>{value.toLocaleString()} <span>MMK</span></strong><em>Lifetime Access</em></div>;
+};
 
 const DashboardLoopPreview = () => {
   const [activeScreenshot, setActiveScreenshot] = useState(0);
@@ -555,7 +572,16 @@ const Select2NotionChapter = () => (
   <CinematicSection id="select2notion" className="cinematic-select2notion">
     <section className="select2notion-section">
       <div className="s2n-room-wrap"><TradingRoom /><div className="s2n-room-vignette" /></div>
-
+      <div className="s2n-desktop-grid">
+        <div className="s2n-content">
+          <div className="s2n-brand-lockup"><img src="/brokers/select2notion.jpg" alt="Select2Notion logo" /><div><strong>Select<span>2</span>Notion</strong><small>Trading Journal → Notion</small></div></div>
+          <div className="s2n-copy"><p className="s2n-eyebrow">YOUR AI TRADING JOURNAL SYSTEM</p><h2>Trade.<br />Journal.<br /><em>Improve.</em></h2><p>Capture trades, analyze performance, and improve your strategy with AI-powered journaling.</p>
+            <div className="s2n-feature-stack">{select2Features.slice(0, 4).map(({ icon: Icon, title, text }) => <div className="s2n-feature" key={title}><i><Icon size={17} /></i><div><strong>{title}</strong><span>{text}</span></div></div>)}</div>
+            <PricingCounter /><a className="s2n-primary" href="https://tally.so/r/44pKVo" target="_blank" rel="noopener noreferrer">UNLOCK LIFETIME ACCESS <ArrowRight size={17} /></a>
+          </div>
+        </div>
+        <div id="select2notion-workflow" className="s2n-overlays"><DashboardLoopPreview /></div>
+      </div>
     </section>
   </CinematicSection>
 );
