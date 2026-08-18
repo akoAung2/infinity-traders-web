@@ -18,7 +18,7 @@ import {
   Calendar,
   Send
 } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react';
 
 // --- Motion utilities ---
 
@@ -531,6 +531,36 @@ const Select2NotionPreview = () => {
   );
 };
 
+const InfinityHeroAtmosphere = () => {
+  const pointerX = useMotionValue(50);
+  const pointerY = useMotionValue(50);
+  const springX = useSpring(pointerX, { stiffness: 100, damping: 20, mass: 0.8 });
+  const springY = useSpring(pointerY, { stiffness: 100, damping: 20, mass: 0.8 });
+  const redX = useTransform(springX, [0, 100], [22, 78]);
+  const redY = useTransform(springY, [0, 100], [28, 64]);
+  const orangeX = useTransform(springX, [0, 100], [76, 24]);
+  const orangeY = useTransform(springY, [0, 100], [70, 20]);
+  const coolX = useTransform(springX, [0, 100], [18, 82]);
+  const coolY = useTransform(springY, [0, 100], [80, 30]);
+
+  return (
+    <div
+      className="hero-mouse-atmosphere"
+      aria-hidden="true"
+      onPointerMove={(event) => {
+        const bounds = event.currentTarget.getBoundingClientRect();
+        pointerX.set(((event.clientX - bounds.left) / bounds.width) * 100);
+        pointerY.set(((event.clientY - bounds.top) / bounds.height) * 100);
+      }}
+    >
+      <motion.div className="hero-mouse-orb hero-mouse-orb-red" style={{ left: redX, top: redY }} />
+      <motion.div className="hero-mouse-orb hero-mouse-orb-orange" style={{ left: orangeX, top: orangeY }} />
+      <motion.div className="hero-mouse-orb hero-mouse-orb-cool" style={{ left: coolX, top: coolY }} />
+      <div className="hero-mouse-vignette" />
+    </div>
+  );
+};
+
 // --- Main App ---
 
 export default function App() {
@@ -545,8 +575,9 @@ export default function App() {
 
       {/* Hero Section */}
       <CinematicSection className="cinematic-hero">
-      <section className="hero-section relative min-h-[90vh] overflow-hidden bg-[#050505]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" />
+  <section className="hero-section relative min-h-[90vh] overflow-hidden bg-[#050505]">
+  <InfinityHeroAtmosphere />
+  <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_35%_at_50%_35%,rgba(255,106,42,0.035),transparent_75%)]" />
         <div className="hero-grid absolute inset-x-0 bottom-0 h-[48%] pointer-events-none" />
         <div className="hero-line hero-line-left absolute left-[-6%] top-[28%] h-[55%] w-px rotate-[28deg] bg-white/[0.07]" />
