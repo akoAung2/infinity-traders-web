@@ -532,6 +532,7 @@ const Select2NotionPreview = () => {
 };
 
 const InfinityHeroAtmosphere = () => {
+  const atmosphereRef = useRef<HTMLDivElement>(null);
   const pointerX = useMotionValue(50);
   const pointerY = useMotionValue(50);
   const springX = useSpring(pointerX, { stiffness: 100, damping: 20, mass: 0.8 });
@@ -543,16 +544,20 @@ const InfinityHeroAtmosphere = () => {
   const coolX = useTransform(springX, [0, 100], [18, 82]);
   const coolY = useTransform(springY, [0, 100], [80, 30]);
 
+  useEffect(() => {
+    const handlePointerMove = (event: PointerEvent) => {
+      const bounds = atmosphereRef.current?.getBoundingClientRect();
+      if (!bounds || event.clientY < bounds.top || event.clientY > bounds.bottom) return;
+      pointerX.set(Math.max(0, Math.min(100, ((event.clientX - bounds.left) / bounds.width) * 100)));
+      pointerY.set(Math.max(0, Math.min(100, ((event.clientY - bounds.top) / bounds.height) * 100)));
+    };
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, [pointerX, pointerY]);
+
   return (
-    <div
-      className="hero-mouse-atmosphere"
-      aria-hidden="true"
-      onPointerMove={(event) => {
-        const bounds = event.currentTarget.getBoundingClientRect();
-        pointerX.set(((event.clientX - bounds.left) / bounds.width) * 100);
-        pointerY.set(((event.clientY - bounds.top) / bounds.height) * 100);
-      }}
-    >
+    <div ref={atmosphereRef} className="hero-mouse-atmosphere" aria-hidden="true">
+      <div className="hero-mouse-cursor-glow" />
       <motion.div className="hero-mouse-orb hero-mouse-orb-red" style={{ left: redX, top: redY }} />
       <motion.div className="hero-mouse-orb hero-mouse-orb-orange" style={{ left: orangeX, top: orangeY }} />
       <motion.div className="hero-mouse-orb hero-mouse-orb-cool" style={{ left: coolX, top: coolY }} />
