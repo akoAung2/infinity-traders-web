@@ -490,46 +490,43 @@ const SELECT2NOTION_SCREENSHOTS = [
   'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.26.00%E2%80%AFPM-LiWWLaHPYr0TZa2cdniZwivNJNRGdd.png',
 ];
 
-const Select2NotionPreview = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
+const CountingNumber = ({ target }: { target: number }) => {
+  const [value, setValue] = useState(0);
+  const [complete, setComplete] = useState(false);
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % SELECT2NOTION_SCREENSHOTS.length);
-    }, 4200);
+    const start = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / 2000, 1);
+      setValue(Math.round(target * (1 - Math.pow(1 - progress, 3))));
+      if (progress < 1) requestAnimationFrame(tick); else setComplete(true);
+    };
+    requestAnimationFrame(tick);
+  }, [target]);
+  return <span className={complete ? 'select2notion-price-complete' : ''}>{value.toLocaleString()}</span>;
+};
+
+const DashboardShowcase = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    const interval = window.setInterval(() => setActiveIndex((current) => (current + 1) % SELECT2NOTION_SCREENSHOTS.length), 4200);
     return () => window.clearInterval(interval);
   }, []);
-
-  return (
-    <CinematicSection id="select2notion" className="cinematic-select2notion">
-      <section className="select2notion-section relative overflow-hidden px-6 py-24 md:px-10 md:py-36">
-        <div className="select2notion-atmosphere" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="select2notion-heading">
-            <div className="select2notion-eyebrow"><span />SELECT2NOTION · LIVE DASHBOARD LOOP</div>
-            <h2>Journal the edge.<br /><em>See the pattern.</em></h2>
-            <p>A focused trading journal for turning setups, psychology and performance into a repeatable process.</p>
-          </div>
-          <div className="select2notion-preview-shell">
-            <div className="select2notion-preview-topbar"><span><i /> LIVE PREVIEW</span><b>SELECT2NOTION</b><small>{String(activeIndex + 1).padStart(2, '0')} / {String(SELECT2NOTION_SCREENSHOTS.length).padStart(2, '0')}</small></div>
-            <div className="select2notion-screen" aria-live="polite">
-              <AnimatePresence mode="wait">
-                <motion.img key={SELECT2NOTION_SCREENSHOTS[activeIndex]} src={SELECT2NOTION_SCREENSHOTS[activeIndex]} alt="Select2Notion trading dashboard preview" initial={{ opacity: 0, scale: 1.015 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.99 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} />
-              </AnimatePresence>
-            </div>
-            <div className="select2notion-dots" aria-label="Dashboard preview frames">
-              {SELECT2NOTION_SCREENSHOTS.map((_, index) => <button key={index} type="button" aria-label={`Show dashboard frame ${index + 1}`} aria-current={index === activeIndex} onClick={() => setActiveIndex(index)} />)}
-            </div>
-          </div>
-          <div className="select2notion-offer">
-            <div><span className="select2notion-offer-label">LIFETIME ACCESS</span><strong><span className="select2notion-price">50,000</span> MMK</strong><p>One payment. Your complete trading journal, forever.</p></div>
-            <a href="https://tally.so/r/wg4g6P" target="_blank" rel="noopener noreferrer" className="select2notion-cta">GET SELECT2NOTION <ArrowUpRight className="h-4 w-4" /></a>
-          </div>
-        </div>
-      </section>
-    </CinematicSection>
-  );
+  return <div className="select2notion-showcase"><div className="select2notion-preview-shell">
+    <div className="select2notion-preview-topbar"><span><i /> LIVE DASHBOARD PREVIEW</span><b>SELECT2NOTION</b><small>{String(activeIndex + 1).padStart(2, '0')} / {String(SELECT2NOTION_SCREENSHOTS.length).padStart(2, '0')}</small></div>
+    <div className="select2notion-screen" aria-live="polite"><AnimatePresence mode="wait"><motion.img key={SELECT2NOTION_SCREENSHOTS[activeIndex]} src={SELECT2NOTION_SCREENSHOTS[activeIndex]} alt="Select2Notion AI trading journal dashboard" initial={{ opacity: 0, scale: 1.015 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.99 }} transition={{ duration: 0.7 }} /></AnimatePresence></div>
+    <div className="select2notion-dots">{SELECT2NOTION_SCREENSHOTS.map((_, index) => <button key={index} type="button" aria-label={`Show dashboard frame ${index + 1}`} aria-current={index === activeIndex} onClick={() => setActiveIndex(index)} />)}</div>
+  </div></div>;
 };
+
+const Select2NotionPreview = () => <section id="select2notion" className="select2notion-hero">
+  <div className="select2notion-hero-grid" aria-hidden="true" /><div className="select2notion-hero-glow" aria-hidden="true" />
+  <div className="select2notion-hero-inner">
+    <div className="select2notion-copy"><div className="select2notion-eyebrow"><span /> SELECT2NOTION</div><p className="select2notion-kicker">AI TRADING JOURNAL SYSTEM</p><h2>Trade with clarity.<br /><em>Compound the edge.</em></h2><p className="select2notion-description">Capture trades, analyze performance, and improve your trading strategy with AI.</p>
+      <div className="select2notion-features"><div><strong>AI AGENT</strong><span>Analyze your trading patterns.</span></div><div><strong>VOICE JOURNALING</strong><span>Create trade logs using your voice.</span></div><div><strong>TELEGRAM BOT</strong><span>Access insights anywhere.</span></div><div><strong>YOUR NOTION DATA</strong><span>Your records stay in your own Notion workspace.</span></div></div>
+      <div className="select2notion-pricing"><span>LIFETIME ACCESS · ONE TIME PAYMENT</span><strong><CountingNumber target={50000} /> <small>MMK</small></strong></div><a href="https://tally.so/r/44pKVo" className="select2notion-cta">UNLOCK LIFETIME ACCESS <ArrowUpRight className="h-4 w-4" /></a>
+    </div><DashboardShowcase />
+  </div>
+</section>;
 
 const InfinityHeroAtmosphere = () => {
   const atmosphereRef = useRef<HTMLDivElement>(null);
