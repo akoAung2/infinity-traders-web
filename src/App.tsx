@@ -18,7 +18,7 @@ import {
   Calendar,
   Send
 } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react';
 
 // --- Motion utilities ---
 
@@ -122,6 +122,9 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
+          <a href="#select2notion" className="our-products-nav">
+            OUR PRODUCTS <ArrowRight className="h-3.5 w-3.5" />
+          </a>
           <a 
             href="https://t.me/+ttDUW71_HVwyMWM9"
             target="_blank"
@@ -158,6 +161,9 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
+              <a href="#select2notion" className="our-products-mobile" onClick={() => setMobileMenuOpen(false)}>
+                OUR PRODUCTS <ArrowRight className="h-4 w-4" />
+              </a>
               <a 
                 href="https://t.me/+ttDUW71_HVwyMWM9"
                 target="_blank"
@@ -478,6 +484,109 @@ const BrokerActionBlock = ({ broker, index }: { broker: BrokerAccess; index: num
   </motion.article>
 );
 
+const SELECT2NOTION_SCREENSHOTS = [
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.23.48%E2%80%AFPM-QZrV4AvlLfhRjLxyQh4PVZwkgO66Xm.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.01%E2%80%AFPM-dtv9luhNnvpuLzmyy8uz61sbgO2pQY.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.23%E2%80%AFPM-vMDMKGGnbc06d2RJKbohVp2u0jInsp.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.35%E2%80%AFPM-DTKPRBkI0ymGbiyFkKT43ivNJOFYhF.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.41%E2%80%AFPM-VSl0XKKWTWwbTevExThQGWNLCmxrbW.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.49%E2%80%AFPM-Z4H98grQsw09MpHHuA0ZFPdjk9cz7c.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.24.57%E2%80%AFPM-ZlEYg1kKCAF6iwhQxIGlvg1aABFD2u.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.25.40%E2%80%AFPM-BqkAKFUjiIYrJUVk5MP9hGfvVN5upd.png',
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-08-16%20at%206.26.00%E2%80%AFPM-LiWWLaHPYr0TZa2cdniZwivNJNRGdd.png',
+];
+
+const CountingNumber = ({ target }: { target: number }) => {
+  const [value, setValue] = useState(0);
+  const [complete, setComplete] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const counterRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.55 });
+    if (counterRef.current) observer.observe(counterRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    let frame = 0;
+    let loopStart = performance.now();
+    const tick = (now: number) => {
+      const elapsed = (now - loopStart) % 8000;
+      const progress = elapsed < 2000 ? elapsed / 2000 : elapsed < 5000 ? 1 : 1 - ((elapsed - 5000) / 3000);
+      const eased = 1 - Math.pow(1 - Math.max(0, progress), 3);
+      setValue(Math.round(target * eased));
+      setComplete(elapsed >= 2000 && elapsed < 5000);
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [isVisible, target]);
+
+  return <span ref={counterRef} className={complete ? 'select2notion-price-complete' : ''}>{value.toLocaleString()}</span>;
+};
+
+const DashboardShowcase = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    const interval = window.setInterval(() => setActiveIndex((current) => (current + 1) % SELECT2NOTION_SCREENSHOTS.length), 4200);
+    return () => window.clearInterval(interval);
+  }, []);
+  return <div className="select2notion-showcase"><div className="select2notion-preview-shell">
+    <div className="select2notion-preview-topbar"><span><i /> LIVE DASHBOARD PREVIEW</span><b>SELECT2NOTION</b><small>{String(activeIndex + 1).padStart(2, '0')} / {String(SELECT2NOTION_SCREENSHOTS.length).padStart(2, '0')}</small></div>
+    <div className="select2notion-screen" aria-live="polite"><AnimatePresence mode="wait"><motion.img key={SELECT2NOTION_SCREENSHOTS[activeIndex]} src={SELECT2NOTION_SCREENSHOTS[activeIndex]} alt="Select2Notion AI trading journal dashboard" initial={{ opacity: 0, scale: 1.015 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.99 }} transition={{ duration: 0.7 }} /></AnimatePresence></div>
+    <div className="select2notion-dots">{SELECT2NOTION_SCREENSHOTS.map((_, index) => <button key={index} type="button" aria-label={`Show dashboard frame ${index + 1}`} aria-current={index === activeIndex} onClick={() => setActiveIndex(index)} />)}</div>
+  </div></div>;
+};
+
+const Select2NotionLogo = () => <img className="select2notion-logo" src="/select2notion-logo.jpg" alt="Select2Notion — Select. Sync. Simplify." />;
+
+const Select2NotionPreview = () => <section id="select2notion" className="select2notion-hero">
+  <div className="select2notion-hero-grid" aria-hidden="true" /><div className="select2notion-hero-glow select2notion-hero-glow-red" aria-hidden="true" /><div className="select2notion-hero-glow select2notion-hero-glow-purple" aria-hidden="true" />
+  <div className="select2notion-hero-inner">
+    <div className="select2notion-copy"><Select2NotionLogo /><div className="select2notion-eyebrow"><span /> SELECT2NOTION</div><p className="select2notion-kicker">AI TRADING JOURNAL SYSTEM</p><h2>Trade with clarity.<br /><em>Compound the edge.</em></h2><p className="select2notion-description">Capture trades, analyze performance, and improve your trading strategy with AI-powered journaling.</p>
+      <div className="select2notion-features"><div><strong>AI AGENT</strong><span>Analyze your trading patterns.</span></div><div><strong>VOICE JOURNALING</strong><span>Create trade logs using your voice.</span></div><div><strong>TELEGRAM BOT</strong><span>Access insights anywhere.</span></div><div><strong>YOUR NOTION DATA</strong><span>Your records stay in your own Notion workspace.</span></div></div>
+      <div className="select2notion-pricing"><span>LIFETIME ACCESS · ONE TIME PAYMENT</span><strong><CountingNumber target={50000} /> <small>MMK</small></strong></div><a href="https://tally.so/r/44pKVo" className="select2notion-cta">UNLOCK LIFETIME ACCESS <ArrowUpRight className="h-4 w-4" /></a>
+    </div><DashboardShowcase />
+  </div>
+</section>;
+
+const InfinityHeroAtmosphere = () => {
+  const atmosphereRef = useRef<HTMLDivElement>(null);
+  const pointerX = useMotionValue(50);
+  const pointerY = useMotionValue(50);
+  const springX = useSpring(pointerX, { stiffness: 100, damping: 20, mass: 0.8 });
+  const springY = useSpring(pointerY, { stiffness: 100, damping: 20, mass: 0.8 });
+  const redX = useTransform(springX, [0, 100], [22, 78]);
+  const redY = useTransform(springY, [0, 100], [28, 64]);
+  const orangeX = useTransform(springX, [0, 100], [76, 24]);
+  const orangeY = useTransform(springY, [0, 100], [70, 20]);
+  const coolX = useTransform(springX, [0, 100], [18, 82]);
+  const coolY = useTransform(springY, [0, 100], [80, 30]);
+
+  useEffect(() => {
+    const handlePointerMove = (event: PointerEvent) => {
+      const bounds = atmosphereRef.current?.getBoundingClientRect();
+      if (!bounds || event.clientY < bounds.top || event.clientY > bounds.bottom) return;
+      pointerX.set(Math.max(0, Math.min(100, ((event.clientX - bounds.left) / bounds.width) * 100)));
+      pointerY.set(Math.max(0, Math.min(100, ((event.clientY - bounds.top) / bounds.height) * 100)));
+    };
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, [pointerX, pointerY]);
+
+  return (
+    <div ref={atmosphereRef} className="hero-mouse-atmosphere" aria-hidden="true">
+      <div className="hero-mouse-cursor-glow" />
+      <motion.div className="hero-mouse-orb hero-mouse-orb-red" style={{ left: redX, top: redY }} />
+      <motion.div className="hero-mouse-orb hero-mouse-orb-orange" style={{ left: orangeX, top: orangeY }} />
+      <motion.div className="hero-mouse-orb hero-mouse-orb-cool" style={{ left: coolX, top: coolY }} />
+      <div className="hero-mouse-vignette" />
+    </div>
+  );
+};
+
 // --- Main App ---
 
 export default function App() {
@@ -492,8 +601,9 @@ export default function App() {
 
       {/* Hero Section */}
       <CinematicSection className="cinematic-hero">
-      <section className="hero-section relative min-h-[90vh] overflow-hidden bg-[#050505]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" />
+  <section className="hero-section relative min-h-[90vh] overflow-hidden bg-[#050505]">
+  <InfinityHeroAtmosphere />
+  <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_35%_at_50%_35%,rgba(255,106,42,0.035),transparent_75%)]" />
         <div className="hero-grid absolute inset-x-0 bottom-0 h-[48%] pointer-events-none" />
         <div className="hero-line hero-line-left absolute left-[-6%] top-[28%] h-[55%] w-px rotate-[28deg] bg-white/[0.07]" />
@@ -702,6 +812,8 @@ export default function App() {
         </div>
       </section>
       </CinematicSection>
+
+      <Select2NotionPreview />
 
       {/* Partners & Collaborations / Trading Ecosystem */}
       <CinematicSection id="brokers" className="cinematic-brokers">
