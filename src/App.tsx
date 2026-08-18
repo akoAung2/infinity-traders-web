@@ -97,7 +97,7 @@ const Navbar = () => {
     { name: 'Purpose', href: '#purpose' },
     { name: 'Systems', href: '#systems' },
     { name: 'Next-Level ', href: '#premium' },
-    { name: 'Brokers', href: '#brokers' },
+    { name: 'collaboration', href: '#brokers' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -113,11 +113,12 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {navLinks.map((link, index) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-sm font-medium text-white/70 hover:text-red-500 transition-colors"
+              className={`text-sm font-medium text-white/70 hover:text-red-500 transition-colors ${index === 3 ? 'font-bold' : ''}`}
+              style={index === 3 ? { fontFamily: '"Roboto", sans-serif', fontWeight: 700 } : undefined}
             >
               {link.name}
             </a>
