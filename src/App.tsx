@@ -122,6 +122,9 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
+          <a href="#select2notion" className="our-products-nav">
+            OUR PRODUCTS <ArrowRight className="h-3.5 w-3.5" />
+          </a>
           <a 
             href="https://t.me/+ttDUW71_HVwyMWM9"
             target="_blank"
@@ -158,6 +161,9 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
+              <a href="#select2notion" className="our-products-mobile" onClick={() => setMobileMenuOpen(false)}>
+                OUR PRODUCTS <ArrowRight className="h-4 w-4" />
+              </a>
               <a 
                 href="https://t.me/+ttDUW71_HVwyMWM9"
                 target="_blank"
@@ -493,16 +499,32 @@ const SELECT2NOTION_SCREENSHOTS = [
 const CountingNumber = ({ target }: { target: number }) => {
   const [value, setValue] = useState(0);
   const [complete, setComplete] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const counterRef = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
-    const start = performance.now();
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.55 });
+    if (counterRef.current) observer.observe(counterRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    let frame = 0;
+    let loopStart = performance.now();
     const tick = (now: number) => {
-      const progress = Math.min((now - start) / 2000, 1);
-      setValue(Math.round(target * (1 - Math.pow(1 - progress, 3))));
-      if (progress < 1) requestAnimationFrame(tick); else setComplete(true);
+      const elapsed = (now - loopStart) % 8000;
+      const progress = elapsed < 2000 ? elapsed / 2000 : elapsed < 5000 ? 1 : 1 - ((elapsed - 5000) / 3000);
+      const eased = 1 - Math.pow(1 - Math.max(0, progress), 3);
+      setValue(Math.round(target * eased));
+      setComplete(elapsed >= 2000 && elapsed < 5000);
+      frame = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
-  }, [target]);
-  return <span className={complete ? 'select2notion-price-complete' : ''}>{value.toLocaleString()}</span>;
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [isVisible, target]);
+
+  return <span ref={counterRef} className={complete ? 'select2notion-price-complete' : ''}>{value.toLocaleString()}</span>;
 };
 
 const DashboardShowcase = () => {
@@ -518,10 +540,12 @@ const DashboardShowcase = () => {
   </div></div>;
 };
 
+const Select2NotionLogo = () => <img className="select2notion-logo" src="/select2notion-logo.jpg" alt="Select2Notion — Select. Sync. Simplify." />;
+
 const Select2NotionPreview = () => <section id="select2notion" className="select2notion-hero">
-  <div className="select2notion-hero-grid" aria-hidden="true" /><div className="select2notion-hero-glow" aria-hidden="true" />
+  <div className="select2notion-hero-grid" aria-hidden="true" /><div className="select2notion-hero-glow select2notion-hero-glow-red" aria-hidden="true" /><div className="select2notion-hero-glow select2notion-hero-glow-purple" aria-hidden="true" />
   <div className="select2notion-hero-inner">
-    <div className="select2notion-copy"><div className="select2notion-eyebrow"><span /> SELECT2NOTION</div><p className="select2notion-kicker">AI TRADING JOURNAL SYSTEM</p><h2>Trade with clarity.<br /><em>Compound the edge.</em></h2><p className="select2notion-description">Capture trades, analyze performance, and improve your trading strategy with AI.</p>
+    <div className="select2notion-copy"><Select2NotionLogo /><div className="select2notion-eyebrow"><span /> SELECT2NOTION</div><p className="select2notion-kicker">AI TRADING JOURNAL SYSTEM</p><h2>Trade with clarity.<br /><em>Compound the edge.</em></h2><p className="select2notion-description">Capture trades, analyze performance, and improve your trading strategy with AI-powered journaling.</p>
       <div className="select2notion-features"><div><strong>AI AGENT</strong><span>Analyze your trading patterns.</span></div><div><strong>VOICE JOURNALING</strong><span>Create trade logs using your voice.</span></div><div><strong>TELEGRAM BOT</strong><span>Access insights anywhere.</span></div><div><strong>YOUR NOTION DATA</strong><span>Your records stay in your own Notion workspace.</span></div></div>
       <div className="select2notion-pricing"><span>LIFETIME ACCESS · ONE TIME PAYMENT</span><strong><CountingNumber target={50000} /> <small>MMK</small></strong></div><a href="https://tally.so/r/44pKVo" className="select2notion-cta">UNLOCK LIFETIME ACCESS <ArrowUpRight className="h-4 w-4" /></a>
     </div><DashboardShowcase />
