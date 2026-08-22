@@ -18,7 +18,10 @@ import {
   Calendar,
   Send
 } from 'lucide-react';
-import { motion, AnimatePresence, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { CinematicSection } from './components/motion/CinematicSection';
+import { ParallaxLayer } from './components/motion/ParallaxLayer';
+import { ScrollReveal } from './components/motion/ScrollReveal';
 
 // --- Motion utilities ---
 
@@ -52,23 +55,6 @@ const useScrollDirection = () => {
 const revealViewport = { once: false, amount: 0.2, margin: '0px 0px -10% 0px' } as const;
 
 // --- Components ---
-
-const CinematicSection = ({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.45 });
-  const y = useTransform(progress, [0, 0.5, 1], [32, 0, -32]);
-  const opacity = useTransform(progress, [0, 0.16, 0.84, 1], [0.78, 1, 1, 0.78]);
-  const scale = useTransform(progress, [0, 0.5, 1], [0.985, 1, 0.985]);
-  const blur = useTransform(progress, [0, 0.18, 0.82, 1], [2, 0, 0, 2]);
-
-  return (
-    <motion.div ref={ref} id={id} className={`cinematic-chapter ${className}`} style={{ y, opacity, scale, filter: blur }}>
-      <div className="cinematic-chapter-scan" aria-hidden="true" />
-      {children}
-    </motion.div>
-  );
-};
 
 const Logo = ({ size = "normal" }: { size?: "small" | "normal" | "large" }) => {
   const dimensions = size === "small" ? "w-8 h-8" : size === "large" ? "w-16 h-16" : "w-10 h-10";
@@ -543,15 +529,17 @@ const DashboardShowcase = () => {
 
 const Select2NotionLogo = () => <img className="select2notion-logo" src="/select2notion-logo.jpg" alt="Select2Notion — Select. Sync. Simplify." />;
 
-const Select2NotionPreview = () => <section id="select2notion" className="select2notion-hero">
+const Select2NotionPreview = () => <CinematicSection id="select2notion" className="cinematic-select2notion">
+  <section className="select2notion-hero">
   <div className="select2notion-hero-grid" aria-hidden="true" /><div className="select2notion-hero-glow select2notion-hero-glow-red" aria-hidden="true" /><div className="select2notion-hero-glow select2notion-hero-glow-purple" aria-hidden="true" />
   <div className="select2notion-hero-inner">
-    <div className="select2notion-copy"><Select2NotionLogo /><div className="select2notion-eyebrow"><span /> SELECT2NOTION</div><p className="select2notion-kicker">AI TRADING JOURNAL SYSTEM</p><h2>Trade with clarity.<br /><em>Compound the edge.</em></h2><p className="select2notion-description">Capture trades, analyze performance, and improve your trading strategy with AI-powered journaling.</p>
+    <ScrollReveal className="select2notion-copy"><Select2NotionLogo /><div className="select2notion-eyebrow"><span /> SELECT2NOTION</div><p className="select2notion-kicker">AI TRADING JOURNAL SYSTEM</p><h2>Trade with clarity.<br /><em>Compound the edge.</em></h2><p className="select2notion-description">Capture trades, analyze performance, and improve your trading strategy with AI-powered journaling.</p>
       <div className="select2notion-features"><div><strong>AI AGENT</strong><span>Analyze your trading patterns.</span></div><div><strong>VOICE JOURNALING</strong><span>Create trade logs using your voice.</span></div><div><strong>TELEGRAM BOT</strong><span>Access insights anywhere.</span></div><div><strong>YOUR NOTION DATA</strong><span>Your records stay in your own Notion workspace.</span></div></div>
       <div className="select2notion-pricing"><span>LIFETIME ACCESS · ONE TIME PAYMENT</span><strong><CountingNumber target={50000} /> <small>MMK</small></strong></div><a href="https://tally.so/r/44pKVo" className="select2notion-cta">UNLOCK LIFETIME ACCESS <ArrowUpRight className="h-4 w-4" /></a>
-    </div><DashboardShowcase />
+    </ScrollReveal><ParallaxLayer className="select2notion-dashboard-layer" depth="ui"><DashboardShowcase /></ParallaxLayer>
   </div>
-</section>;
+  </section>
+</CinematicSection>;
 
 const InfinityHeroAtmosphere = () => {
   const atmosphereRef = useRef<HTMLDivElement>(null);
@@ -601,17 +589,16 @@ export default function App() {
       <Navbar />
 
       {/* Hero Section */}
-      <CinematicSection className="cinematic-hero">
+      <CinematicSection className="cinematic-hero" intensity="subtle">
   <section className="hero-section relative min-h-[90vh] overflow-hidden bg-[#050505]">
-  <InfinityHeroAtmosphere />
-  <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" />
+  <ParallaxLayer className="absolute inset-0" depth="background"><InfinityHeroAtmosphere /><div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_72%,rgba(255,55,45,0.08),transparent_72%)]" /></ParallaxLayer>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_35%_at_50%_35%,rgba(255,106,42,0.035),transparent_75%)]" />
         <div className="hero-grid absolute inset-x-0 bottom-0 h-[48%] pointer-events-none" />
         <div className="hero-line hero-line-left absolute left-[-6%] top-[28%] h-[55%] w-px rotate-[28deg] bg-white/[0.07]" />
         <div className="hero-line hero-line-right absolute right-[-6%] top-[26%] h-[58%] w-px rotate-[-28deg] bg-white/[0.07]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/25 to-transparent" />
 
-        <div className="relative z-10 mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center justify-center px-6 pb-32 pt-32 text-center md:px-10">
+        <ParallaxLayer className="relative z-10" depth="ui"><div className="mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center justify-center px-6 pb-32 pt-32 text-center md:px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -673,7 +660,7 @@ export default function App() {
               </div>
             ))}
           </motion.div>
-        </div>
+        </div></ParallaxLayer>
 
         <div className="hero-marquee absolute bottom-0 left-0 right-0 z-20 overflow-hidden border-y border-red-500/[0.25] bg-[#050505]/70 py-3 backdrop-blur-sm md:py-4">
           <div className="mb-2 text-center font-mono text-[9px] font-medium uppercase tracking-[0.18em] text-white/40 md:text-[10px]">In collaboration with</div>

@@ -1,0 +1,440 @@
+- generic [ref=f8e3]:
+  - navigation [ref=f8e4]:
+    - generic [ref=f8e5]:
+      - generic [ref=f8e6]:
+        - img "Infinity Trader Logo" [ref=f8e8]
+        - generic [ref=f8e9]: Infinity Trader
+      - button [ref=f8e10]
+  - generic [ref=f8e13]:
+    - generic [ref=f8e21]:
+      - generic [ref=f8e22]: "Myanmar's #1 Trading Community"
+      - heading "Infinity Knowledge. Infinity Growth." [level=1] [ref=f8e25]: Infinity Knowledge.Infinity Growth.
+      - paragraph [ref=f8e26]: Empowering Myanmar traders with free professional trading education and real broker support.
+      - generic [ref=f8e27]:
+        - link "Join Free Community" [ref=f8e28] [cursor=pointer]:
+          - /url: https://t.me/+ttDUW71_HVwyMWM9
+        - link "Explore Systems" [ref=f8e31] [cursor=pointer]:
+          - /url: "#systems"
+      - generic [ref=f8e32]:
+        - generic [ref=f8e33]:
+          - generic [ref=f8e34]: 100%
+          - generic [ref=f8e35]: Free Core Education
+        - generic [ref=f8e36]:
+          - generic [ref=f8e37]: "3"
+          - generic [ref=f8e38]: Trading Systems
+        - generic [ref=f8e39]:
+          - generic [ref=f8e40]: "2"
+          - generic [ref=f8e41]: Broker Partners
+    - generic [ref=f8e42]:
+      - generic [ref=f8e43]: In collaboration with
+      - generic [ref=f8e45]:
+        - generic [ref=f8e46]:
+          - generic [ref=f8e47]: VT Markets
+          - generic [ref=f8e49]: Ultima Markets
+          - generic [ref=f8e51]: Burmese Funded Trader
+          - generic [ref=f8e53]: Select2Notion
+        - generic [ref=f8e55]:
+          - generic [ref=f8e56]: VT Markets
+          - generic [ref=f8e58]: Ultima Markets
+          - generic [ref=f8e60]: Burmese Funded Trader
+          - generic [ref=f8e62]: Select2Notion
+  - generic [ref=f8e67]:
+    - generic [ref=f8e68]:
+      - heading "Our Purpose" [level=2] [ref=f8e70]
+      - paragraph [ref=f8e72]: Infinity Trader Community exists to improve and elevate the trading standard in Myanmar. We provide free access to powerful trading systems including SMC, ICT, and SNR.
+      - paragraph [ref=f8e73]: "We support traders with the lowest possible spreads through our broker collaborations. Our mission is simple: Give real knowledge. Build real traders. Create financial independence."
+      - generic [ref=f8e74]:
+        - generic [ref=f8e75]: 100% Free Core Education
+        - generic [ref=f8e81]: Structured System-Based Learning
+        - generic [ref=f8e86]: Live Account Broker Support
+        - generic [ref=f8e94]: Long-Term Trader Development
+    - generic [ref=f8e100]:
+      - img "Infinity Traders community and brand partnerships" [ref=f8e102]
+      - generic [ref=f8e103]:
+        - generic [ref=f8e104]: 100%
+        - generic [ref=f8e105]: Free Education
+  - generic [ref=f8e108]:
+    - generic [ref=f8e109]:
+      - generic [ref=f8e110]: FREE TRADING EDUCATION
+      - heading [level=2] [ref=f8e112]:
+        - text: Master Proven
+        - emphasis [ref=f8e113]: Trading Systems.
+      - paragraph [ref=f8e114]: Structured trading frameworks built to help you read the market with clarity, precision and discipline.
+      - generic [ref=f8e115]:
+        - generic [ref=f8e116]: "%"
+        - generic [ref=f8e117]:
+          - strong [ref=f8e118]: 100% FREE EDUCATION
+          - generic [ref=f8e119]: Every system. No payment required.
+    - generic [ref=f8e121]:
+      - article [ref=f8e122]:
+        - generic [ref=f8e123]:
+          - generic [ref=f8e124]: SYSTEM 01
+          - generic [ref=f8e125]: FREE
+        - heading "SMC" [level=3] [ref=f8e127]
+        - generic [ref=f8e128]: Smart Money Concept
+        - generic [ref=f8e129]:
+          - generic [ref=f8e134]: BOS
+          - generic [ref=f8e135]: LIQUIDITY
+        - list [ref=f8e136]:
+          - listitem [ref=f8e137]: Market Structure
+          - listitem [ref=f8e139]: Liquidity Concepts
+          - listitem [ref=f8e141]: Institutional Order Flow
+        - generic [ref=f8e143]:
+          - strong [ref=f8e144]: 100% FREE
+          - link "Explore System" [ref=f8e145] [cursor=pointer]:
+            - /url: https://t.me/c/3540469523/16
+      - article [ref=f8e148]:
+        - generic [ref=f8e149]:
+          - generic [ref=f8e150]: SYSTEM 02
+          - generic [ref=f8e151]: FREE
+        - heading "ICT" [level=3] [ref=f8e153]
+        - generic [ref=f8e154]: Inner Circle Trader
+        - generic [ref=f8e155]:
+          - generic [ref=f8e160]: LONDON
+          - generic [ref=f8e161]: NY OPEN
+          - generic [ref=f8e162]: NY CLOSE
+        - list [ref=f8e163]:
+          - listitem [ref=f8e164]: Session Timing
+          - listitem [ref=f8e166]: Liquidity Sweeps
+          - listitem [ref=f8e168]: Price Delivery
+        - generic [ref=f8e170]:
+          - strong [ref=f8e171]: 100% FREE
+          - link "Explore System" [ref=f8e172] [cursor=pointer]:
+            - /url: https://t.me/c/3540469523/24
+      - article [ref=f8e175]:
+        - generic [ref=f8e176]:
+          - generic [ref=f8e177]: SYSTEM 03
+          - generic [ref=f8e178]: FREE
+        - heading "SNR" [level=3] [ref=f8e180]
+        - generic [ref=f8e181]: Support & Resistance
+        - generic [ref=f8e182]:
+          - generic [ref=f8e187]: RESISTANCE
+          - generic [ref=f8e188]: SUPPORT
+        - list [ref=f8e189]:
+          - listitem [ref=f8e190]: Key Reaction Zones
+          - listitem [ref=f8e192]: Clean Price Action
+          - listitem [ref=f8e194]: Entry & Exit Models
+        - generic [ref=f8e196]:
+          - strong [ref=f8e197]: 100% FREE
+          - link "Explore System" [ref=f8e198] [cursor=pointer]:
+            - /url: https://t.me/c/3540469523/22
+    - generic [ref=f8e201]:
+      - generic [ref=f8e202]:
+        - generic [ref=f8e203]: ◆
+        - strong [ref=f8e204]: 100% FREE
+        - paragraph [ref=f8e205]: All systems and lessons are completely free.
+      - generic [ref=f8e206]:
+        - generic [ref=f8e207]: ◆
+        - strong [ref=f8e208]: HIGH QUALITY
+        - paragraph [ref=f8e209]: Structured trading education.
+      - generic [ref=f8e210]:
+        - generic [ref=f8e211]: ◆
+        - strong [ref=f8e212]: PRACTICAL LEARNING
+        - paragraph [ref=f8e213]: Real market concepts and implementation.
+      - generic [ref=f8e214]:
+        - generic [ref=f8e215]: ◆
+        - strong [ref=f8e216]: FOR EVERY TRADER
+        - paragraph [ref=f8e217]: Beginners to advanced, everyone can learn.
+  - generic [ref=f8e220]:
+    - generic [ref=f8e221]:
+      - generic [ref=f8e222]:
+        - generic [ref=f8e223]: PREMIUM MEMBERSHIP PROGRAM
+        - heading [level=2] [ref=f8e225]:
+          - text: THE NEXT LEVEL
+          - emphasis [ref=f8e226]: IS LOADING.
+        - paragraph [ref=f8e227]: We're building a premium trading ecosystem for traders who want sharper systems, deeper execution, and a serious edge.
+        - generic [ref=f8e228]: ACCESS RESTRICTED · COMING SOON
+      - generic [ref=f8e230]:
+        - generic [ref=f8e231]: PREMIUM ENVIRONMENT
+        - img "Infinity Trader" [ref=f8e233]
+        - generic [ref=f8e234]: INFINITYTRADER
+        - generic [ref=f8e235]:
+          - generic [ref=f8e236]: "SYS: PREPARING"
+          - generic [ref=f8e237]: V.01
+      - generic [ref=f8e238]:
+        - generic [ref=f8e239]:
+          - generic [ref=f8e240]:
+            - generic [ref=f8e241]: "01"
+            - generic [ref=f8e242]: LOCKED
+          - heading "THE TRADING DESK" [level=3] [ref=f8e243]
+          - paragraph [ref=f8e244]: Execution frameworks, market context and repeatable systems.
+        - generic [ref=f8e245]:
+          - generic [ref=f8e246]:
+            - generic [ref=f8e247]: "02"
+            - generic [ref=f8e248]: LOCKED
+          - heading "PRIVATE SIGNALS" [level=3] [ref=f8e249]
+          - paragraph [ref=f8e250]: High-conviction ideas built around process, not noise.
+        - generic [ref=f8e251]:
+          - generic [ref=f8e252]:
+            - generic [ref=f8e253]: "03"
+            - generic [ref=f8e254]: LOCKED
+          - heading "LIVE BREAKDOWNS" [level=3] [ref=f8e255]
+          - paragraph [ref=f8e256]: Real-time thinking for traders ready to sharpen their edge.
+        - generic [ref=f8e257]:
+          - generic [ref=f8e258]:
+            - generic [ref=f8e259]: "04"
+            - generic [ref=f8e260]: LOCKED
+          - heading "THE INNER CIRCLE" [level=3] [ref=f8e261]
+          - paragraph [ref=f8e262]: A focused room for serious growth and accountability.
+      - button "Stay tuned for the Premium Membership Program" [ref=f8e263]: STAY TUNED →
+    - generic "Future premium modules" [ref=f8e264]:
+      - generic [ref=f8e265]:
+        - generic [ref=f8e266]: PRIVATE SIGNALS
+        - generic [ref=f8e267]: ◆
+        - generic [ref=f8e268]: LIVE BREAKDOWNS
+        - generic [ref=f8e269]: ◆
+        - generic [ref=f8e270]: ADVANCED SYSTEMS
+        - generic [ref=f8e271]: ◆
+        - generic [ref=f8e272]: THE INNER CIRCLE
+        - generic [ref=f8e273]: ◆
+        - generic [ref=f8e274]: PRIVATE SIGNALS
+        - generic [ref=f8e275]: ◆
+        - generic [ref=f8e276]: LIVE BREAKDOWNS
+        - generic [ref=f8e277]: ◆
+  - generic [ref=f8e281]:
+    - generic [ref=f8e282]:
+      - img "Select2Notion — Select. Sync. Simplify." [ref=f8e283]
+      - generic [ref=f8e284]: SELECT2NOTION
+      - paragraph [ref=f8e286]: AI TRADING JOURNAL SYSTEM
+      - heading [level=2] [ref=f8e287]:
+        - text: Trade with clarity.
+        - emphasis [ref=f8e288]: Compound the edge.
+      - paragraph [ref=f8e289]: Capture trades, analyze performance, and improve your trading strategy with AI-powered journaling.
+      - generic [ref=f8e290]:
+        - generic [ref=f8e291]:
+          - strong [ref=f8e292]: AI AGENT
+          - generic [ref=f8e293]: Analyze your trading patterns.
+        - generic [ref=f8e294]:
+          - strong [ref=f8e295]: VOICE JOURNALING
+          - generic [ref=f8e296]: Create trade logs using your voice.
+        - generic [ref=f8e297]:
+          - strong [ref=f8e298]: TELEGRAM BOT
+          - generic [ref=f8e299]: Access insights anywhere.
+        - generic [ref=f8e300]:
+          - strong [ref=f8e301]: YOUR NOTION DATA
+          - generic [ref=f8e302]: Your records stay in your own Notion workspace.
+      - generic [ref=f8e303]:
+        - generic [ref=f8e304]: LIFETIME ACCESS · ONE TIME PAYMENT
+        - strong [ref=f8e305]: 0 MMK
+      - link "UNLOCK LIFETIME ACCESS" [ref=f8e306] [cursor=pointer]:
+        - /url: https://tally.so/r/44pKVo
+    - generic [ref=f8e312]:
+      - generic [ref=f8e313]:
+        - generic [ref=f8e314]: LIVE DASHBOARD PREVIEW
+        - generic [ref=f8e316]: 05 / 09
+      - img "Select2Notion AI trading journal dashboard" [ref=f8e318]
+      - generic [ref=f8e319]:
+        - button "Show dashboard frame 1" [ref=f8e320] [cursor=pointer]
+        - button "Show dashboard frame 2" [ref=f8e321] [cursor=pointer]
+        - button "Show dashboard frame 3" [ref=f8e322] [cursor=pointer]
+        - button "Show dashboard frame 4" [ref=f8e323] [cursor=pointer]
+        - button "Show dashboard frame 5" [ref=f8e324] [cursor=pointer]
+        - button "Show dashboard frame 6" [ref=f8e325] [cursor=pointer]
+        - button "Show dashboard frame 7" [ref=f8e326] [cursor=pointer]
+        - button "Show dashboard frame 8" [ref=f8e327] [cursor=pointer]
+        - button "Show dashboard frame 9" [ref=f8e328] [cursor=pointer]
+  - generic [ref=f8e333]:
+    - generic [ref=f8e334]:
+      - generic [ref=f8e335]:
+        - generic [ref=f8e336]: "03"
+        - text: PARTNERS & COLLABORATIONS
+      - heading "Built With The Trading Ecosystem." [level=2] [ref=f8e338]: Built With TheTrading Ecosystem.
+      - paragraph [ref=f8e339]: Working alongside brokers, funded trading programs and tools that help our community trade, learn and grow.
+    - generic [ref=f8e340]:
+      - generic [ref=f8e341]:
+        - img "Infinity Trader Logo" [ref=f8e344]
+        - generic [ref=f8e345]: INFINITYTRADER
+      - generic [ref=f8e346]:
+        - generic [ref=f8e347]: COLLABORATION
+        - img "VT Markets logo" [ref=f8e351]
+        - generic [ref=f8e352]: BROKER PARTNER
+      - generic [ref=f8e353]:
+        - generic [ref=f8e354]: COLLABORATION
+        - img "Ultima Markets logo" [ref=f8e358]
+        - generic [ref=f8e359]: BROKER PARTNER
+      - generic [ref=f8e360]:
+        - generic [ref=f8e361]: COLLABORATION
+        - img "Burmese Funded Trader logo" [ref=f8e365]
+        - generic [ref=f8e366]: PROP TRADING PARTNER
+      - generic [ref=f8e367]:
+        - generic [ref=f8e368]: COLLABORATION
+        - img "Select2Notion logo" [ref=f8e372]
+        - generic [ref=f8e373]: TRADING JOURNAL PLATFORM
+    - generic [ref=f8e374]:
+      - generic [ref=f8e375]: DIFFERENT PLATFORMS.
+      - strong [ref=f8e376]: ONE TRADING ECOSYSTEM.
+    - generic [ref=f8e377]:
+      - generic [ref=f8e378]: OUR PARTNERS
+      - generic [ref=f8e380]: TRUSTED COLLABORATIONS
+    - generic [ref=f8e382]:
+      - generic [ref=f8e383]:
+        - generic [ref=f8e384]: VT Markets•
+        - generic [ref=f8e385]: Ultima Markets•
+        - generic [ref=f8e386]: Burmese Funded Trader•
+        - generic [ref=f8e387]: Select2Notion•
+      - generic [ref=f8e388]:
+        - generic [ref=f8e389]: VT Markets•
+        - generic [ref=f8e390]: Ultima Markets•
+        - generic [ref=f8e391]: Burmese Funded Trader•
+        - generic [ref=f8e392]: Select2Notion•
+    - generic [ref=f8e393]: AUTO LOOP
+  - generic [ref=f8e397]:
+    - generic [ref=f8e398]:
+      - generic [ref=f8e399]: Live Account Access
+      - heading "Open Your Live Account." [level=2] [ref=f8e401]
+      - paragraph [ref=f8e402]: Choose the trading setup that fits your strategy, platform and trading conditions.
+      - generic [ref=f8e403]:
+        - generic [ref=f8e404]: Broker Access
+        - generic [ref=f8e406]: MT4 · MT5
+        - generic [ref=f8e407]: Global Markets
+    - generic [ref=f8e408]:
+      - article [ref=f8e409]:
+        - generic [ref=f8e411]:
+          - img "VT Markets logo" [ref=f8e414]
+          - heading "Global Market Access" [level=3] [ref=f8e419]
+          - generic [ref=f8e420]:
+            - generic [ref=f8e421]: Account options
+            - generic [ref=f8e422]:
+              - generic [ref=f8e423]:
+                - heading "Standard STP" [level=4] [ref=f8e425]
+                - generic [ref=f8e428]:
+                  - generic [ref=f8e429]:
+                    - generic [ref=f8e430]: Spread
+                    - generic [ref=f8e431]: From 1.2 pips
+                  - generic [ref=f8e432]:
+                    - generic [ref=f8e433]: Commission
+                    - generic [ref=f8e434]: $0
+              - generic [ref=f8e435]:
+                - heading "Raw ECN" [level=4] [ref=f8e437]
+                - generic [ref=f8e440]:
+                  - generic [ref=f8e441]:
+                    - generic [ref=f8e442]: Spread
+                    - generic [ref=f8e443]: From 0.0 pips
+                  - generic [ref=f8e444]:
+                    - generic [ref=f8e445]: Commission
+                    - generic [ref=f8e446]: $6 round turn
+          - generic [ref=f8e447]:
+            - generic [ref=f8e448]: Platforms
+            - generic [ref=f8e449]:
+              - generic [ref=f8e450]: MT4
+              - generic [ref=f8e451]: MT5
+              - generic [ref=f8e452]: TradingView
+              - generic [ref=f8e453]: WebTrader
+          - link "Open Live Account" [ref=f8e454] [cursor=pointer]:
+            - /url: https://www.vtmarkets.com/trade-now/?affid=22393651
+      - article [ref=f8e458]:
+        - generic [ref=f8e460]:
+          - img "Ultima Markets logo" [ref=f8e463]
+          - heading "Multi-Asset Market Access" [level=3] [ref=f8e468]
+          - generic [ref=f8e469]:
+            - generic [ref=f8e470]: Account options
+            - generic [ref=f8e471]:
+              - generic [ref=f8e472]:
+                - heading "Standard" [level=4] [ref=f8e474]
+                - generic [ref=f8e477]:
+                  - generic [ref=f8e478]:
+                    - generic [ref=f8e479]: Spread
+                    - generic [ref=f8e480]: From 1.0 pips
+                  - generic [ref=f8e481]:
+                    - generic [ref=f8e482]: Commission
+                    - generic [ref=f8e483]: $0
+                  - generic [ref=f8e484]:
+                    - generic [ref=f8e485]: Min deposit
+                    - generic [ref=f8e486]: $20
+              - generic [ref=f8e487]:
+                - heading "ECN" [level=4] [ref=f8e489]
+                - generic [ref=f8e492]:
+                  - generic [ref=f8e493]:
+                    - generic [ref=f8e494]: Spread
+                    - generic [ref=f8e495]: From 0.0 pips
+                  - generic [ref=f8e496]:
+                    - generic [ref=f8e497]: Commission
+                    - generic [ref=f8e498]: $5
+          - generic [ref=f8e499]:
+            - generic [ref=f8e500]: Platforms
+            - generic [ref=f8e501]:
+              - generic [ref=f8e502]: MT4
+              - generic [ref=f8e503]: MT5
+              - generic [ref=f8e504]: WebTrader
+          - link "Open Live Account" [ref=f8e505] [cursor=pointer]:
+            - /url: https://ultgo.com/la-com/BavQ65KR
+    - paragraph [ref=f8e509]: Trading conditions, spreads, commissions and availability may vary by region, account type and market conditions.
+  - generic [ref=f8e511]:
+    - generic: CONTACT
+    - generic [ref=f8e514]:
+      - generic [ref=f8e515]:
+        - generic [ref=f8e516]:
+          - generic [ref=f8e517]: Contact
+          - heading "Get in touch" [level=2] [ref=f8e518]
+          - paragraph [ref=f8e519]: Have questions about trading, our community, or broker support? Reach out through any of the channels below.
+        - generic [ref=f8e520]:
+          - link "Email Us iinfinitytraders@gmail.com" [ref=f8e521] [cursor=pointer]:
+            - /url: mailto:iinfinitytraders@gmail.com
+            - generic [ref=f8e526]:
+              - generic [ref=f8e527]: Email Us
+              - generic [ref=f8e528]: iinfinitytraders@gmail.com
+          - link "Telegram Infinity Trader Community" [ref=f8e531] [cursor=pointer]:
+            - /url: https://t.me/+ttDUW71_HVwyMWM9
+            - generic [ref=f8e535]:
+              - generic [ref=f8e536]: Telegram
+              - generic [ref=f8e537]: Infinity Trader Community
+          - link "TikTok @infinity_traders1" [ref=f8e540] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@infinity_traders1?_r=1&_t=ZS-94Oxj7X8eaC
+            - generic [ref=f8e545]:
+              - generic [ref=f8e546]: TikTok
+              - generic [ref=f8e547]: "@infinity_traders1"
+      - generic [ref=f8e551]:
+        - heading "Send us a message" [level=3] [ref=f8e552]
+        - paragraph [ref=f8e553]: We will get back to you as soon as possible.
+        - generic [ref=f8e554]:
+          - generic [ref=f8e555]:
+            - generic [ref=f8e556]: Name
+            - textbox "Name" [ref=f8e557]:
+              - /placeholder: Your full name
+          - generic [ref=f8e558]:
+            - generic [ref=f8e559]: Email
+            - textbox "Email" [ref=f8e560]:
+              - /placeholder: your@email.com
+          - generic [ref=f8e561]:
+            - generic [ref=f8e562]: Message
+            - textbox "Message" [ref=f8e563]:
+              - /placeholder: How can we help you?
+          - button "Send Message" [ref=f8e564]
+  - contentinfo [ref=f8e570]:
+    - generic [ref=f8e571]:
+      - generic [ref=f8e572]:
+        - generic [ref=f8e573]:
+          - generic [ref=f8e574]:
+            - img "Infinity Trader Logo" [ref=f8e576]
+            - generic [ref=f8e577]: Infinity Trader
+          - paragraph [ref=f8e578]: Empowering Myanmar Traders Since 2024. We are dedicated to building a professional trading ecosystem through education and support.
+        - generic [ref=f8e579]:
+          - heading "Quick Links" [level=4] [ref=f8e580]
+          - list [ref=f8e581]:
+            - listitem [ref=f8e582]:
+              - link "Our Purpose" [ref=f8e583] [cursor=pointer]:
+                - /url: "#purpose"
+            - listitem [ref=f8e584]:
+              - link "Trading Systems" [ref=f8e585] [cursor=pointer]:
+                - /url: "#systems"
+            - listitem [ref=f8e586]:
+              - link "Premium Mentorship" [ref=f8e587] [cursor=pointer]:
+                - /url: "#premium"
+            - listitem [ref=f8e588]:
+              - link "Broker Partners" [ref=f8e589] [cursor=pointer]:
+                - /url: "#brokers"
+        - generic [ref=f8e590]:
+          - heading "Legal" [level=4] [ref=f8e591]
+          - list [ref=f8e592]:
+            - listitem [ref=f8e593]:
+              - link "Privacy Policy" [ref=f8e594] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e595]:
+              - link "Terms of Service" [ref=f8e596] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e597]:
+              - link "Risk Disclaimer" [ref=f8e598] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=f8e599]:
+        - paragraph [ref=f8e600]: © 2026 Infinity Trader Community. All rights reserved.
+        - paragraph [ref=f8e601]: Trading financial instruments involves high risk. Past performance is not indicative of future results. Please trade responsibly.
