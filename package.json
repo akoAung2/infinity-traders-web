@@ -1,0 +1,8 @@
+{
+  "name": "infinity-traders-web",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node -e \"console.log('Static site: no build step required')\""
+  }
+}
